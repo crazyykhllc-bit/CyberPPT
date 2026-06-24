@@ -85,7 +85,7 @@ python -m unittest scripts/test_validate_pptx.py -v
 
 ### 隐私与素材安全
 
-不要提交客户文档、生成后的 PPT、渲染预览图、私有项目校验报告或项目过程记录。仓库中的 `.gitignore` 已默认排除常见源文件和输出文件。
+`.gitignore` 已默认排除常见素材文件、演示文稿输出和本地预览结果，便于将仓库保持为干净的 Skill 源码项目。
 
 ### 许可证
 
@@ -174,7 +174,7 @@ The validator focuses on structural and editability risks. It does not replace f
 
 ### Privacy and source material
 
-Do not commit client documents, generated decks, slide renders, validation reports from private projects, or project-specific process notes. The `.gitignore` is configured to exclude common source and output files by default.
+The `.gitignore` excludes common source materials, presentation outputs, and local preview artifacts by default, keeping this repository focused on the Skill source files.
 
 ### License
 
