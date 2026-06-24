@@ -1,0 +1,4 @@
+interface:
+  display_name: "CyberPPT"
+  short_description: "Create evidence-based editable consulting presentations"
+  default_prompt: "Use $cyber-ppt to turn my source documents into a high-density editable consulting presentation."

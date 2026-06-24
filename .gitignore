@@ -1,0 +1,53 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# Node dependencies and build output
+node_modules/
+dist/
+build/
+
+# Private source materials and generated presentation outputs
+*.docx
+*.doc
+*.pdf
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.pptx
+*.ppt
+*.key
+*.pages
+
+# Rendered previews and generated media
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.svg
+*.mp4
+*.mov
+
+# Project-specific working directories
+deck/
+*-deck/
+docs/superpowers/
+output/
+outputs/
+preview/
+previews/
+reports/
+validation/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
