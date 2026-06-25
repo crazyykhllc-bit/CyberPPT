@@ -14,6 +14,9 @@ Run `scripts/validate_pptx.py` and review:
 - full-slide image risk;
 - native text, shape, chart, table, and image counts;
 - coverage and low-density warnings.
+- text shape count and information-unit count by slide;
+- picture count, with any image use explained;
+- slides with charts but no interpretation or implication block.
 
 Static checks are heuristic. A clean report does not prove the deck looks correct.
 
@@ -34,6 +37,10 @@ Check:
 - style drift from the approved direction;
 - missing sources, units, periods, or forecast labels;
 - conclusions unsupported by visible evidence.
+- content slides that are visually busy but narratively thin;
+- chart-only pages without explanatory text;
+- missing SO WHAT, implication, or decision/action block;
+- cover slides that look like dashboards when the confirmed style is consulting-report cover.
 
 ## Severity
 
@@ -48,9 +55,10 @@ Check:
 
 1. Correct data and missing content.
 2. Correct canvas, overflow, and clipping.
-3. Correct hierarchy and readability.
-4. Correct chart labels and annotation.
-5. Correct consistency and polish.
+3. Correct missing interpretation, implication, and SO WHAT blocks.
+4. Correct hierarchy and readability.
+5. Correct chart labels and annotation.
+6. Correct consistency and polish.
 
 Re-render affected pages after every layout change. Re-run the structural validator after regenerating the PPTX.
 
@@ -61,6 +69,7 @@ Provide:
 - editable PPTX;
 - full-deck rendered previews;
 - structural QA summary;
+- density QA summary, including text shape count, picture count, and slides requiring narrative review;
 - disclosed warnings or unresolved source conflicts;
 - version and output paths.
 

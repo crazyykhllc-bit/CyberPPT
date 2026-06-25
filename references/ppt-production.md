@@ -26,6 +26,20 @@ Build these as editable PowerPoint objects:
 
 Use images for photography, illustration, textures, maps that cannot reasonably be rebuilt, and approved decorative assets. Do not flatten the entire slide into a screenshot.
 
+## Blueprint-to-PPT production
+
+Use confirmed ImageGen blueprints as visual references only. Before building each slide, write a brief production note:
+
+- conclusion title;
+- primary chart or analytical construct;
+- supporting evidence blocks;
+- interpretation text;
+- business implication or SO WHAT;
+- native editable element list;
+- source note and footer requirements.
+
+Build the PPT from that note and the evidence table, not from generated text in the blueprint.
+
 ## Chart standards
 
 - Match chart type to the analytical question.
@@ -50,6 +64,8 @@ Use images for photography, illustration, textures, maps that cannot reasonably 
 - Use one conclusion title per content page.
 - Keep body copy concise but sufficient to explain evidence.
 - Avoid solving density by shrinking all text.
+- Do not produce chart-only pages. Every content page needs enough explanatory text to show what the evidence proves and what decision it implies.
+- For MBB-style or consulting report decks, default covers should be low-density and title-led. Do not add KPI blocks, dashboards, or data cards to the cover unless requested.
 - Use consistent typography, indentation, bullet spacing, and source notes.
 - Ensure contrast remains accessible on projectors and exported images.
 
@@ -70,4 +86,5 @@ Before QA:
 - figures match the evidence table;
 - native elements remain editable;
 - no generated placeholder wording remains;
+- no content slide is only a chart skeleton without interpretation and implication;
 - page geometry matches the selected visual system.

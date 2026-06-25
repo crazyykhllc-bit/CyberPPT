@@ -35,6 +35,11 @@ build/
 *.mp4
 *.mov
 
+# Public README examples
+!assets/
+!assets/palette-samples/
+!assets/palette-samples/*.png
+
 # Project-specific working directories
 deck/
 *-deck/
