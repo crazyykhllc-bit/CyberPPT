@@ -17,9 +17,9 @@ When no brand palette is supplied, show the eight fixed CyberPPT palette options
 
 Each palette sample should use comparable content density and page structure so the user can judge tone, hierarchy, chart language, and readability. Once selected, the palette is locked for the full deck.
 
-## Default style exploration
+## Optional style exploration
 
-Generate five materially different directions:
+If the user asks for broader visual exploration beyond palette selection, generate distinct style directions such as:
 
 1. MBB high-density consulting
 2. Premium brand strategy
@@ -27,9 +27,9 @@ Generate five materially different directions:
 4. Swiss international grid
 5. Modern data storytelling
 
-Replace a direction when it conflicts with the subject or audience, but keep five clearly distinguishable options.
+Replace any direction when it conflicts with the subject or audience, and keep the options clearly distinguishable.
 
-If the user asks specifically for palette comparison, generate all eight palette samples instead of the five style directions.
+Palette comparison still uses the eight fixed CyberPPT palettes.
 
 ## Image generation rules
 
