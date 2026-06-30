@@ -119,6 +119,17 @@
 - 蓝图不是最终 PPT 图片资产。除非用户明确要求静态图交付，第三阶段不得把整页蓝图或大面积蓝图截图作为页面背景。
 - 蓝图中的折线图、柱状图、坐标轴、标签、表格、对比条、流程箭头、页眉页脚和 SO WHAT 只定义视觉关系，第三阶段默认必须原生重建。
 - 除非用户明确要求，否则咨询报告封面蓝图保持低密度。
+- 生成逐页蓝图前，必须自动判定默认 `target_language`，不得为语言选择单独增加确认步骤。
+- 默认 `target_language` 判定优先级：用户明确指定的全局交付语言 > 源材料主要语言 > 当前对话语言。
+- 只有源材料多语言且无明显主语言，或用户指令与源材料语言冲突时，才询问用户确认。
+- 每页蓝图提示词必须显式包含 `target_language`、`language_source` 和本页生效的 `effective_language`。
+- 如果用户明确要求某一页、某一节或某个组件使用不同语言，必须登记 `language_overrides`。
+- `language_overrides` 至少记录：`scope`、`target`、`language`、`reason`。
+- QA 时以 `effective_language` 为准，不得用全局 `target_language` 判定已登记覆盖范围失败。
+- 蓝图中的所有可见文字占位，包括标题、模块标题、图表标签、图例、轴标签、注释、来源、页脚、SO WHAT 和按钮/标签，都必须使用对应范围的 `effective_language`。
+- 不得因为 ImageGen、MBB、consulting slide、executive deck 或英文 prompt 模板更常见，就默认生成英文蓝图。
+- 英文或其他外语只允许用于品牌名、产品名、专有名词、代码名、原文引用、指标缩写、用户明确要求保留原文的内容，或已登记的 `language_overrides` 范围，并应记录为 `allowed_foreign_terms` 或 `language_overrides`。
+- `target_language`、`language_source`、`effective_language`、`language_overrides` 和 `allowed_foreign_terms` 是执行元数据，只能写入蓝图记录、prompt 说明、manifest 或 QA 记录，不得写入页面内容区，不得作为蓝图画面中的可见文字。
 
 每张蓝图还要记录：
 
@@ -128,6 +139,11 @@
 - 需要用 PowerPoint 原生形状、表格或图表重建的组件；
 - 是否允许最终 `pictures > 0`，以及每个允许图片资产的必要性；如果没有复杂照片、Logo、产品 UI、复杂插画、复杂纹理或 3D，则记录为“无需保留图片资产，最终 pictures 应为 0”；
 - 支撑最终文本和数据的证据 ID；
+- `target_language`：整套 PPT 的默认目标交付语言；
+- `language_source`：`user_specified`、`source_material` 或 `conversation`；
+- `effective_language`：本页实际使用语言，等于默认语言或页级覆盖语言；
+- `language_overrides`：页级、章节级或组件级语言覆盖；
+- `allowed_foreign_terms`：允许保留外语的品牌名、产品名、专有名词、指标缩写或原文引用；
 - 预期信息密度和页面组件清单。
 
 这些记录必须能直接转成第三阶段 `slide_manifest.json`。第二阶段蓝图记录中必须明确给出：
@@ -136,6 +152,17 @@
 - `image_assets`：允许保留为图片的区域；每项必须写明区域、来源类型、必要性和可编辑性牺牲；
 - `native_components`：折线图、柱状图、坐标轴、标签、关键数字、表格、对比条、流程箭头、SO WHAT、页眉页脚默认都必须列入；
 - `text_objects`：主要文字区域对应的 Typography Scale 层级，至少覆盖标题、副标题、模块标题、正文、图表标签、关键数字、注释、来源、SO WHAT 和页码。
+- `target_language`、`language_source`、`effective_language`、`language_overrides` 和 `allowed_foreign_terms`：语言规则执行记录；这些字段是元数据，不得进入页面可见内容。
+
+以下情况视为逐页蓝图子阶段失败，不得进入 PPTX：
+
+- 未自动判定并记录 `target_language`；
+- 每页未记录本页 `effective_language`；
+- 用户未要求英文，且英文不是该页有效目标语言，却默认生成英文蓝图；
+- 蓝图标题、图表标签、SO WHAT、注释或来源等主要可见文字语言与 `effective_language` 不一致；
+- 存在页级、章节级或组件级外语内容，但未记录在 `language_overrides` 或 `allowed_foreign_terms`；
+- 用户只要求局部范围使用另一语言，却把未覆盖范围也改成该语言；
+- 页面画面中出现语言元数据字段或类似“目标语言=中文”“language=Chinese”的执行指令文字。
 
 每张蓝图还必须做图表语义和追踪触发记录：
 

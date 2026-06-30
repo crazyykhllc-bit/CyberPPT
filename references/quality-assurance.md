@@ -24,6 +24,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 若页面组件清单写明无需图片资产，检查该页 `pictures` 是否为 0；
 - 若页面主图是折线图、柱状图、坐标轴、对比条、表格或 SO WHAT，检查这些是否由原生文本/形状/图表承载，而不是图片；
 - 标题、标签、数值、来源和 SO WHAT 块的文字可编辑性；
+- 页面可见内容中是否残留语言元数据或执行指令文字，例如 `target_language`、`effective_language`、“目标语言=中文”或 `language=Chinese`；
 - 可编辑信息层与视觉语义高保真是否同时成立；不得只因为文字可编辑或 `pictures=0` 就判定页面合格；
 - 原生文字、形状、图表、表格和图片数量；
 - 覆盖率和低密度警告；
@@ -99,6 +100,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 第二阶段组件清单写明“无需保留图片资产”，但最终 `pictures > 0`。
 - 标题、正文、关键数字、图表标签、注释、页脚、页码或 SO WHAT 无法选中编辑。
 - 用遮罩覆盖蓝图文字后出现重影、残留、缺图、图表结构破坏或生成文字污染。
+- 页面可见内容中出现 `target_language`、`language_source`、`effective_language`、`language_overrides`、`allowed_foreign_terms`、“目标语言=中文”或 `language=Chinese` 等执行元数据或语言指令文字，视为生成文字污染，不得交付确认。
 - 任一文字对象未能归入固定 Typography Scale（`C0`, `T1-T14`），或低于对应层级字号范围下限且没有明确例外说明。
 - 内容页正文因压缩密度低于正常可读层级；通常 T7 正文小于 9.5pt、T10 SO WHAT 正文小于 9.5pt、T11 图表轴/图例/微图标签小于 7.5pt 时必须复查并优先重排。
 - 未提供 `slide_manifest.json`、manifest 缺页、manifest 字段缺失、manifest 与 PPTX 图片数量不一致，均视为 High/Critical，不得交付确认。
