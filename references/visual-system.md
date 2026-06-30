@@ -137,7 +137,7 @@
 - 计划保留为复杂视觉资产的区域或元素；
 - 预留给可编辑文本的区域；
 - 需要用 PowerPoint 原生形状、表格或图表重建的组件；
-- 是否允许最终 `pictures > 0`，以及每个允许图片资产的必要性；如果没有复杂照片、Logo、产品 UI、复杂插画、复杂纹理或 3D，则记录为“无需保留图片资产，最终 pictures 应为 0”；
+- 是否允许最终 `pictures > 0`，以及每个允许图片资产的必要性；如果复杂视觉扫描确认没有复杂照片、Logo、产品 UI、复杂插画、复杂纹理、复杂 3D、复杂图标、流线、异形边界、复杂弧线、非标准图表形态或其他非文字视觉资产，则记录为“无复杂视觉资产，通常可原生重建，pictures=0 仅为预期结果而非目标”；
 - 支撑最终文本和数据的证据 ID；
 - `target_language`：整套 PPT 的默认目标交付语言；
 - `language_source`：`user_specified`、`source_material` 或 `conversation`；
@@ -148,11 +148,12 @@
 
 这些记录必须能直接转成第三阶段 `slide_manifest.json`。第二阶段蓝图记录中必须明确给出：
 
-- `expected_pictures`：无复杂照片、Logo、产品 UI、复杂插画、复杂纹理、复杂 3D 或复杂光影时必须为 `0`；
+- `expected_pictures`：必须来自复杂视觉扫描和资产准入判断；无复杂视觉资产且蓝图允许完全原生重建时通常为 `0`，但不得作为第三阶段目标；
 - `image_assets`：允许保留为图片的区域；每项必须写明区域、来源类型、必要性和可编辑性牺牲；
 - `native_components`：折线图、柱状图、坐标轴、标签、关键数字、表格、对比条、流程箭头、SO WHAT、页眉页脚默认都必须列入；
 - `text_objects`：主要文字区域对应的 Typography Scale 层级，至少覆盖标题、副标题、模块标题、正文、图表标签、关键数字、注释、来源、SO WHAT 和页码。
 - `target_language`、`language_source`、`effective_language`、`language_overrides` 和 `allowed_foreign_terms`：语言规则执行记录；这些字段是元数据，不得进入页面可见内容。
+- `complex_visual_scan`：记录扫描完成状态、复杂视觉候选、触发门、native-only 理由和 `pictures_zero_is_not_goal=true`；不得主动避免触发图片、曲线、异形或复杂视觉门。
 
 以下情况视为逐页蓝图子阶段失败，不得进入 PPTX：
 

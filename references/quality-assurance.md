@@ -32,6 +32,8 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 图片资产说明，并解释每张图片为什么需要保留为图片、是否牺牲可编辑性；
 - `slide_manifest.json` 是否覆盖全部页面，且 `expected_pictures`、`image_assets`、`text_objects`、`native_components`、`qa_expectations` 字段完整；
 - 当 `qa_expectations.visual_semantics_required = true` 时，manifest 是否包含完整 `blueprint_reconstruction_plan`，并覆盖蓝图路径、画布、背景色、表面系统、版式区域、页眉页脚、SO WHAT、主图语义、密度、锚点、原生重建对象和允许视觉资产；
+- `blueprint_reconstruction_plan.complex_visual_scan` 是否完整，是否记录复杂视觉候选、触发门、native-only 理由和 `pictures_zero_is_not_goal=true`；
+- `generation_engine` 是否完整，是否优先使用 PptxGenJS / pptx-generator；若使用 `python-pptx`，是否提供具体 fallback reason 且声明 `visual_fidelity_not_reduced=true`；
 - manifest 中每个 `text_objects.role` 是否属于固定 Typography Scale（`C0`, `T1-T14`），`font_size_pt` 是否达到对应下限；
 - manifest 中触发精确追踪的组件是否包含 `trace_required: true`、`trace_method`、`trace_reference_crop`、`trace_debug_artifact` 和资产路径；
 - manifest 中触发精确追踪的核心曲线是否记录 `trace_curves`、`point_count` 和最小采样要求；
@@ -129,6 +131,8 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - `deliverable_allowed=true` 但缺少已批准蓝图图、当前 PPT 渲染图、side-by-side 对照图或 `visual_differences`，视为 Critical，不得交付确认。
 - 任一视觉 QA 字段为 `true` 但没有对应 `evidence`，视为 Critical，不得交付确认。
 - `qa_expectations.visual_semantics_required = true` 但缺少完整 `blueprint_reconstruction_plan`，视为 Critical，不得生成或交付。
+- 缺少 `complex_visual_scan`、扫描不完整、或把 `pictures=0` 写成目标，视为 Critical，不得生成或交付。
+- 缺少 `generation_engine`、工具记录不完整、或 `python-pptx` fallback 无具体原因，视为 Critical，不得生成或交付。
 
 ## 图片资产判定
 
@@ -136,7 +140,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 
 | 判定项 | 要求 |
 |---|---|
-| `pictures = 0` | 简单图表页、文字叙事页、基础表格页默认应达到 |
+| `pictures = 0` | 不是目标；仅当复杂视觉扫描确认无复杂资产且蓝图允许完全原生重建时，才是预期结果 |
 | `pictures > 0` | 必须说明每张图的来源、区域、保留原因和是否牺牲可编辑性 |
 | 大面积蓝图图片 | 默认失败；除非用户明确要求静态图交付 |
 | 简单图表图片 | 默认失败；折线、柱状、坐标轴、对比条、标签应原生重建 |
@@ -237,8 +241,9 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 |---|---|
 | 没有 `slide_manifest.json` | 失败，不能进入 PPTX 生成或交付确认 |
 | manifest 没有覆盖全部页面 | 失败，缺页必须补齐 |
-| 无复杂资产页 `expected_pictures` 不是 `0` | 失败，必须改为 `0` |
+| 无复杂资产页 `expected_pictures` 不是 `0` | 失败，必须重新核对复杂视觉扫描和资产准入判断 |
 | `pictures_must_be_zero = true` 但 PPTX `pictures > 0` | 失败，必须原生重建或重新声明复杂资产并获准 |
+| manifest 把 `pictures=0`、`target_pictures=0` 或 `pictures_zero_goal=true` 写成目标 | 失败，`pictures=0` 只能是扫描后的预期结果 |
 | 图片超过 40% 页面面积但 `image_assets` 为空 | 失败，必须删除图片或补充合法复杂资产说明 |
 | 图片超过 90% 页面面积 | 内容页失败，默认视为整页背景/蓝图误用 |
 | `text_objects` 缺 `role` 或 `font_size_pt` | 失败，不能交付 |
@@ -247,6 +252,11 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 | `dual_gate_required` 或 `visual_semantics_required` 缺失/不为 true | 失败，必须在 manifest 中声明并执行双硬门槛 |
 | `visual_semantics_required = true` 但缺少 `blueprint_reconstruction_plan` | 失败，必须先拆解蓝图再生成 PPTX |
 | `blueprint_reconstruction_plan` 缺少蓝图路径、画布、背景色、表面系统、版式区域、页眉页脚、SO WHAT、主图语义、密度、锚点、原生重建目标或允许视觉资产 | 失败，必须补齐拆解记录 |
+| `blueprint_reconstruction_plan.complex_visual_scan` 缺失或不完整 | 失败，必须先扫描复杂视觉候选和触发门 |
+| `complex_visual_scan.pictures_zero_is_not_goal` 不是 `true` | 失败，必须重申 `pictures=0` 非目标原则并重做资产准入判断 |
+| 缺少 `generation_engine` | 失败，必须记录 PPTX 生成工具 |
+| `generation_engine.visual_fidelity_not_reduced` 不是 `true` | 失败，不得以工具限制降低蓝图还原 |
+| `generation_engine.tool = python-pptx` 但缺少 `fallback_reason` | 失败，必须说明为什么不能用 PptxGenJS / pptx-generator |
 | `trace_required = true` 但缺少追踪方法、裁切图、debug 图或资产路径 | 失败，必须补齐追踪产物 |
 | `trace_required = true` 但缺少 `geometry_analysis` 或 `rendered_crop_comparison` | 失败，必须先完成几何拆解和局部渲染对照 |
 | 曲线/异形图表没有登记 `trace_required` 却被近似重建 | 失败，必须回到追踪流程 |

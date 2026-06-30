@@ -69,7 +69,15 @@ BLUEPRINT_RECONSTRUCTION_REQUIRED_FIELDS = (
     "anchor_targets",
     "native_rebuild_targets",
     "allowed_visual_assets",
+    "complex_visual_scan",
 )
+COMPLEX_VISUAL_SCAN_REQUIRED_FIELDS = (
+    "completed",
+    "complex_visual_candidates",
+    "triggered_gates",
+    "pictures_zero_is_not_goal",
+)
+PYTHON_PPTX_TOOL_NAMES = {"python-pptx", "python_pptx", "pythonpptx"}
 VISUAL_QA_REQUIRED_FIELDS = (
     "surface_system_match",
     "main_chart_semantics_match",
@@ -137,6 +145,12 @@ STRICT_FAILURE_CODES = {
     "MANIFEST_TABLE_DENSITY_INCOMPLETE",
     "MANIFEST_BLUEPRINT_RECONSTRUCTION_PLAN_MISSING",
     "MANIFEST_BLUEPRINT_RECONSTRUCTION_PLAN_INCOMPLETE",
+    "MANIFEST_VISUAL_COMPLEXITY_SCAN_MISSING",
+    "MANIFEST_VISUAL_COMPLEXITY_SCAN_INCOMPLETE",
+    "MANIFEST_PICTURES_ZERO_USED_AS_GOAL",
+    "MANIFEST_GENERATION_ENGINE_MISSING",
+    "MANIFEST_GENERATION_ENGINE_INCOMPLETE",
+    "MANIFEST_PYTHON_PPTX_FALLBACK_UNJUSTIFIED",
     "VISUAL_QA_NOT_PROVIDED",
     "VISUAL_QA_INVALID",
     "VISUAL_QA_SLIDE_MISSING",
@@ -326,16 +340,109 @@ def validate_manifest_slide(
                 )
             )
         else:
-            missing_plan_fields = [
-                field
-                for field in BLUEPRINT_RECONSTRUCTION_REQUIRED_FIELDS
-                if reconstruction_plan.get(field) in (None, "", [], {})
-            ]
+            missing_plan_fields = []
+            for field in BLUEPRINT_RECONSTRUCTION_REQUIRED_FIELDS:
+                field_value = reconstruction_plan.get(field)
+                if field == "allowed_visual_assets":
+                    if not isinstance(field_value, list):
+                        missing_plan_fields.append(field)
+                elif field == "complex_visual_scan":
+                    if not isinstance(field_value, dict):
+                        missing_plan_fields.append(field)
+                elif field in {"layout_regions", "anchor_targets", "native_rebuild_targets"}:
+                    if not isinstance(field_value, list) or not field_value:
+                        missing_plan_fields.append(field)
+                elif field_value in (None, "", [], {}):
+                    missing_plan_fields.append(field)
             if missing_plan_fields:
                 warnings.append(
                     issue(
                         "MANIFEST_BLUEPRINT_RECONSTRUCTION_PLAN_INCOMPLETE",
                         f"blueprint_reconstruction_plan is missing: {', '.join(missing_plan_fields)}.",
+                        slide=slide_number,
+                    )
+                )
+            complex_visual_scan = reconstruction_plan.get("complex_visual_scan")
+            if not isinstance(complex_visual_scan, dict):
+                warnings.append(
+                    issue(
+                        "MANIFEST_VISUAL_COMPLEXITY_SCAN_MISSING",
+                        "blueprint_reconstruction_plan requires complex_visual_scan before choosing native-only reconstruction.",
+                        slide=slide_number,
+                    )
+                )
+            else:
+                scan_missing_fields = []
+                if complex_visual_scan.get("completed") is not True:
+                    scan_missing_fields.append("completed")
+                if not isinstance(complex_visual_scan.get("complex_visual_candidates"), list):
+                    scan_missing_fields.append("complex_visual_candidates")
+                if not isinstance(complex_visual_scan.get("triggered_gates"), list):
+                    scan_missing_fields.append("triggered_gates")
+                if "pictures_zero_is_not_goal" not in complex_visual_scan:
+                    scan_missing_fields.append("pictures_zero_is_not_goal")
+                if scan_missing_fields:
+                    warnings.append(
+                        issue(
+                            "MANIFEST_VISUAL_COMPLEXITY_SCAN_INCOMPLETE",
+                            "complex_visual_scan must record completion, complex candidates, triggered gates, and the pictures=0 non-goal assertion.",
+                            slide=slide_number,
+                        )
+                    )
+                if (
+                    complex_visual_scan.get("pictures_zero_is_not_goal") is not True
+                    or qa.get("pictures_zero_goal") is True
+                    or entry.get("pictures_zero_goal") is True
+                    or qa.get("target_pictures") == 0
+                    or entry.get("target_pictures") == 0
+                ):
+                    warnings.append(
+                        issue(
+                            "MANIFEST_PICTURES_ZERO_USED_AS_GOAL",
+                            "pictures=0 is not a third-stage goal and cannot justify avoiding asset, curve, or complex-visual gates.",
+                            slide=slide_number,
+                        )
+                    )
+                candidates = complex_visual_scan.get("complex_visual_candidates")
+                triggered_gates = complex_visual_scan.get("triggered_gates")
+                if (
+                    isinstance(candidates, list)
+                    and isinstance(triggered_gates, list)
+                    and not candidates
+                    and not triggered_gates
+                    and not complex_visual_scan.get("native_only_rationale")
+                ):
+                    warnings.append(
+                        issue(
+                            "MANIFEST_VISUAL_COMPLEXITY_SCAN_INCOMPLETE",
+                            "native-only reconstruction requires a rationale when no complex visual candidates or gates are found.",
+                            slide=slide_number,
+                        )
+                    )
+        generation_engine = entry.get("generation_engine")
+        if not isinstance(generation_engine, dict):
+            warnings.append(
+                issue(
+                    "MANIFEST_GENERATION_ENGINE_MISSING",
+                    "visual_semantics_required=true requires generation_engine metadata.",
+                    slide=slide_number,
+                )
+            )
+        else:
+            tool_name = str(generation_engine.get("tool", "")).strip().lower()
+            if not tool_name or generation_engine.get("visual_fidelity_not_reduced") is not True:
+                warnings.append(
+                    issue(
+                        "MANIFEST_GENERATION_ENGINE_INCOMPLETE",
+                        "generation_engine must record the PPTX tool and assert that visual fidelity was not reduced.",
+                        slide=slide_number,
+                    )
+                )
+            if tool_name in PYTHON_PPTX_TOOL_NAMES and not generation_engine.get("fallback_reason"):
+                warnings.append(
+                    issue(
+                        "MANIFEST_PYTHON_PPTX_FALLBACK_UNJUSTIFIED",
+                        "python-pptx fallback requires a concrete reason; it cannot be chosen to simplify blueprint reconstruction.",
                         slide=slide_number,
                     )
                 )

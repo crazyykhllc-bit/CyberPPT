@@ -353,6 +353,175 @@ class ValidatePptxTests(unittest.TestCase):
             )
         )
 
+    def test_visual_semantics_requires_complexity_scan(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "continuous paper system",
+                "layout_regions": ["title", "main_chart", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "flow diagram",
+                "density_targets": "dense consulting page",
+                "anchor_targets": ["title baseline", "flow endpoints"],
+                "native_rebuild_targets": ["title", "labels", "so_what"],
+                "allowed_visual_assets": [],
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        self.assertTrue(
+            any(
+                item["code"] == "MANIFEST_VISUAL_COMPLEXITY_SCAN_MISSING"
+                for item in issues
+            )
+        )
+
+    def test_pictures_zero_cannot_be_declared_as_goal(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "continuous paper system",
+                "layout_regions": ["title", "main_chart", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "flow diagram",
+                "density_targets": "dense consulting page",
+                "anchor_targets": ["title baseline", "flow endpoints"],
+                "native_rebuild_targets": ["title", "labels", "so_what"],
+                "allowed_visual_assets": [],
+                "complex_visual_scan": {
+                    "completed": True,
+                    "complex_visual_candidates": ["flow bands"],
+                    "triggered_gates": ["curve_trace"],
+                    "pictures_zero_is_not_goal": False,
+                },
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+                "pictures_zero_goal": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        self.assertTrue(
+            any(item["code"] == "MANIFEST_PICTURES_ZERO_USED_AS_GOAL" for item in issues)
+        )
+
+    def test_python_pptx_requires_fallback_reason_and_no_fidelity_reduction(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "generation_engine": {
+                "tool": "python-pptx",
+                "fallback_reason": "",
+                "visual_fidelity_not_reduced": False,
+            },
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "continuous paper system",
+                "layout_regions": ["title", "main_chart", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "flow diagram",
+                "density_targets": "dense consulting page",
+                "anchor_targets": ["title baseline", "flow endpoints"],
+                "native_rebuild_targets": ["title", "labels", "so_what"],
+                "allowed_visual_assets": [],
+                "complex_visual_scan": {
+                    "completed": True,
+                    "complex_visual_candidates": [],
+                    "triggered_gates": [],
+                    "native_only_rationale": "no complex visual assets in blueprint",
+                    "pictures_zero_is_not_goal": True,
+                },
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        codes = {item["code"] for item in issues}
+        self.assertIn("MANIFEST_PYTHON_PPTX_FALLBACK_UNJUSTIFIED", codes)
+        self.assertIn("MANIFEST_GENERATION_ENGINE_INCOMPLETE", codes)
+
+    def test_native_only_complexity_scan_allows_empty_candidates_with_rationale(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "generation_engine": {
+                "tool": "pptxgenjs",
+                "fallback_reason": None,
+                "visual_fidelity_not_reduced": True,
+            },
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "flat editorial page",
+                "layout_regions": ["title", "body", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "none",
+                "density_targets": "text-led page",
+                "anchor_targets": ["title baseline", "body column"],
+                "native_rebuild_targets": ["title", "body", "so_what"],
+                "allowed_visual_assets": [],
+                "complex_visual_scan": {
+                    "completed": True,
+                    "complex_visual_candidates": [],
+                    "triggered_gates": [],
+                    "native_only_rationale": "blueprint contains only text, flat color bands, and simple separators",
+                    "pictures_zero_is_not_goal": True,
+                },
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        codes = {item["code"] for item in issues}
+        self.assertNotIn("MANIFEST_VISUAL_COMPLEXITY_SCAN_INCOMPLETE", codes)
+
 
 if __name__ == "__main__":
     unittest.main()
