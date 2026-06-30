@@ -522,6 +522,152 @@ class ValidatePptxTests(unittest.TestCase):
         codes = {item["code"] for item in issues}
         self.assertNotIn("MANIFEST_VISUAL_COMPLEXITY_SCAN_INCOMPLETE", codes)
 
+    def test_visual_semantics_requires_single_page_execution_record(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "generation_engine": {
+                "tool": "pptxgenjs",
+                "fallback_reason": None,
+                "visual_fidelity_not_reduced": True,
+            },
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "flat editorial page",
+                "layout_regions": ["title", "body", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "none",
+                "density_targets": "text-led page",
+                "anchor_targets": ["title baseline", "body column"],
+                "native_rebuild_targets": ["title", "body", "so_what"],
+                "allowed_visual_assets": [],
+                "complex_visual_scan": {
+                    "completed": True,
+                    "complex_visual_candidates": [],
+                    "triggered_gates": [],
+                    "native_only_rationale": "blueprint contains only text and separators",
+                    "pictures_zero_is_not_goal": True,
+                },
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        self.assertTrue(
+            any(item["code"] == "MANIFEST_PAGE_EXECUTION_MISSING" for item in issues)
+        )
+
+    def test_page_execution_must_be_single_page_and_confirmed(self):
+        module = load_validator()
+        metrics = {
+            "pictures": 0,
+            "max_picture_area_ratio": 0,
+            "native_text_shapes": 1,
+        }
+        manifest_entry = {
+            "slide": 1,
+            "expected_pictures": 0,
+            "image_assets": [],
+            "generation_engine": {
+                "tool": "pptxgenjs",
+                "fallback_reason": None,
+                "visual_fidelity_not_reduced": True,
+            },
+            "blueprint_reconstruction_plan": {
+                "blueprint_path": "blueprints/slide-01.png",
+                "canvas_size": "16:9",
+                "background_color_sample": "#F3F4EF",
+                "surface_system": "flat editorial page",
+                "layout_regions": ["title", "body", "so_what"],
+                "header_footer_system": "source footer",
+                "so_what_region": "bottom band",
+                "main_chart_semantics": "none",
+                "density_targets": "text-led page",
+                "anchor_targets": ["title baseline", "body column"],
+                "native_rebuild_targets": ["title", "body", "so_what"],
+                "allowed_visual_assets": [],
+                "complex_visual_scan": {
+                    "completed": True,
+                    "complex_visual_candidates": [],
+                    "triggered_gates": [],
+                    "native_only_rationale": "blueprint contains only text and separators",
+                    "pictures_zero_is_not_goal": True,
+                },
+            },
+            "page_execution": {
+                "mode": "batch_deck",
+                "single_page_pptx_path": "",
+                "blueprint_render_path": "blueprints/slide-01.png",
+                "ppt_render_path": "renders/slide-01.png",
+                "side_by_side_path": "qa/slide-01-side-by-side.png",
+                "local_comparison_artifacts": [],
+                "page_status": "draft",
+                "user_confirmed": False,
+                "made_before_next_slide": False,
+            },
+            "qa_expectations": {
+                "visual_semantics_required": True,
+            },
+        }
+        issues = module.validate_manifest_slide(manifest_entry, metrics, 1)
+        codes = {item["code"] for item in issues}
+        self.assertIn("MANIFEST_PAGE_EXECUTION_NOT_SINGLE_PAGE", codes)
+        self.assertIn("MANIFEST_PAGE_APPROVAL_MISSING", codes)
+
+    def test_batch_final_delivery_is_forbidden_for_high_fidelity_deck(self):
+        module = load_validator()
+        manifest = {
+            "delivery_mode": "batch_final_deck",
+            "fidelity_requirement": "high_fidelity",
+            "slides": [
+                {
+                    "slide": 1,
+                    "qa_expectations": {"visual_semantics_required": True},
+                },
+                {
+                    "slide": 2,
+                    "qa_expectations": {"visual_semantics_required": True},
+                },
+            ],
+        }
+        issues = module.validate_manifest(manifest)
+        self.assertTrue(
+            any(item["code"] == "MANIFEST_BATCH_FINAL_DELIVERY_FORBIDDEN" for item in issues)
+        )
+
+    def test_final_merge_cannot_regenerate_pages_and_requires_regression(self):
+        module = load_validator()
+        manifest = {
+            "delivery_mode": "approved_single_page_merge",
+            "slides": [
+                {"slide": 1, "qa_expectations": {"visual_semantics_required": True}},
+                {"slide": 2, "qa_expectations": {"visual_semantics_required": True}},
+            ],
+            "final_merge": {
+                "method": "regenerate_full_deck",
+                "regenerated_pages": True,
+                "source_single_page_pptx": ["pages/slide-01.pptx"],
+                "merge_regression_rendered": False,
+                "merge_regression_pass": False,
+            },
+        }
+        issues = module.validate_manifest(manifest)
+        codes = {item["code"] for item in issues}
+        self.assertIn("MANIFEST_FINAL_MERGE_REGENERATED_PAGES", codes)
+        self.assertIn("MANIFEST_MERGE_REGRESSION_MISSING", codes)
+        self.assertIn("MANIFEST_MERGE_REGRESSION_FAILED", codes)
+
 
 if __name__ == "__main__":
     unittest.main()

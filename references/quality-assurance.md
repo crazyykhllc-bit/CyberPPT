@@ -34,6 +34,8 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 当 `qa_expectations.visual_semantics_required = true` 时，manifest 是否包含完整 `blueprint_reconstruction_plan`，并覆盖蓝图路径、画布、背景色、表面系统、版式区域、页眉页脚、SO WHAT、主图语义、密度、锚点、原生重建对象和允许视觉资产；
 - `blueprint_reconstruction_plan.complex_visual_scan` 是否完整，是否记录复杂视觉候选、触发门、native-only 理由和 `pictures_zero_is_not_goal=true`；
 - `generation_engine` 是否完整，是否优先使用 PptxGenJS / pptx-generator；若使用 `python-pptx`，是否提供具体 fallback reason 且声明 `visual_fidelity_not_reduced=true`；
+- `page_execution` 是否完整，是否记录单页 PPTX、蓝图图、PPT 渲染图、side-by-side、局部对照、用户确认和 `made_before_next_slide=true`；
+- 多页高保真交付是否声明 `final_merge`，且合并方式是否为导入已通过单页 PPTX，而不是重新生成页面；
 - manifest 中每个 `text_objects.role` 是否属于固定 Typography Scale（`C0`, `T1-T14`），`font_size_pt` 是否达到对应下限；
 - manifest 中触发精确追踪的组件是否包含 `trace_required: true`、`trace_method`、`trace_reference_crop`、`trace_debug_artifact` 和资产路径；
 - manifest 中触发精确追踪的核心曲线是否记录 `trace_curves`、`point_count` 和最小采样要求；
@@ -133,6 +135,9 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - `qa_expectations.visual_semantics_required = true` 但缺少完整 `blueprint_reconstruction_plan`，视为 Critical，不得生成或交付。
 - 缺少 `complex_visual_scan`、扫描不完整、或把 `pictures=0` 写成目标，视为 Critical，不得生成或交付。
 - 缺少 `generation_engine`、工具记录不完整、或 `python-pptx` fallback 无具体原因，视为 Critical，不得生成或交付。
+- 缺少 `page_execution`、不是 `mode=single_page`、当前页未经用户确认、或未证明“确认后才进入下一页”，视为 Critical，不得生成下一页或交付。
+- 高保真多页终版使用一次性批量生成，或先批量生成完整 PPTX 再事后补写 manifest/visual QA/side-by-side，视为 Critical，不得交付。
+- 最终合并重新生成页面、重新排版、重新绘制图表、重新套用背景、使用单页渲染图作为整页背景，或缺少合并后回归验证，视为 Critical，不得交付。
 
 ## 图片资产判定
 
@@ -257,6 +262,15 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 | 缺少 `generation_engine` | 失败，必须记录 PPTX 生成工具 |
 | `generation_engine.visual_fidelity_not_reduced` 不是 `true` | 失败，不得以工具限制降低蓝图还原 |
 | `generation_engine.tool = python-pptx` 但缺少 `fallback_reason` | 失败，必须说明为什么不能用 PptxGenJS / pptx-generator |
+| `page_execution` 缺失或不完整 | 失败，必须补单页执行和验收记录 |
+| `page_execution.mode` 不是 `single_page` | 失败，不能一次性批量生成终版 |
+| `page_execution.user_confirmed` 不是 `true` 或 `page_status` 不是 `approved` | 失败，当前页未经用户确认不得进入下一页或最终合并 |
+| `page_execution.made_before_next_slide` 不是 `true` | 失败，必须证明当前页先通过再制作下一页 |
+| `delivery_mode = batch_final_deck` 且为高保真多页交付 | 失败，批量终版禁止 |
+| 多页高保真交付缺少 `final_merge` | 失败，必须声明最终合并方式 |
+| `final_merge.method` 不是 `merge_approved_single_page_pptx` 或 `regenerated_pages = true` | 失败，合并阶段不得重新生成页面 |
+| `final_merge.source_single_page_pptx` 未覆盖每页 | 失败，必须列出每页已通过单页 PPTX |
+| `merge_regression_rendered` 或 `merge_regression_pass` 不是 `true` | 失败，合并后必须渲染回归并通过 |
 | `trace_required = true` 但缺少追踪方法、裁切图、debug 图或资产路径 | 失败，必须补齐追踪产物 |
 | `trace_required = true` 但缺少 `geometry_analysis` 或 `rendered_crop_comparison` | 失败，必须先完成几何拆解和局部渲染对照 |
 | 曲线/异形图表没有登记 `trace_required` 却被近似重建 | 失败，必须回到追踪流程 |
@@ -306,6 +320,8 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - `visual_qa_gate.json` 路径与逐页关键项结果；
 - `slide_manifest.json` 路径与 manifest 覆盖摘要；
 - 每页 `blueprint_reconstruction_plan` 覆盖摘要；
+- 每页 `page_execution` 摘要，包括单页 PPTX、用户确认、side-by-side 和局部对照路径；
+- `final_merge` 摘要，包括已通过单页 PPTX 列表、合并方式和合并后回归验证结果；
 - 每个视觉 QA true 字段的证据摘要或证据路径；
 - 密度 QA 摘要，包括文本形状数量、图片资产数量、整页图片检查和需要叙事复查的页面；
 - 复杂视觉资产摘要，说明哪些区域以图片保留、哪些地方因此牺牲了可编辑性；

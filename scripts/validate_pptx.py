@@ -78,6 +78,16 @@ COMPLEX_VISUAL_SCAN_REQUIRED_FIELDS = (
     "pictures_zero_is_not_goal",
 )
 PYTHON_PPTX_TOOL_NAMES = {"python-pptx", "python_pptx", "pythonpptx"}
+HIGH_FIDELITY_VALUES = {
+    "high_fidelity",
+    "high-fidelity",
+    "1:1",
+    "one_to_one",
+    "precise",
+    "exact",
+    "formal",
+    "final",
+}
 VISUAL_QA_REQUIRED_FIELDS = (
     "surface_system_match",
     "main_chart_semantics_match",
@@ -151,6 +161,15 @@ STRICT_FAILURE_CODES = {
     "MANIFEST_GENERATION_ENGINE_MISSING",
     "MANIFEST_GENERATION_ENGINE_INCOMPLETE",
     "MANIFEST_PYTHON_PPTX_FALLBACK_UNJUSTIFIED",
+    "MANIFEST_PAGE_EXECUTION_MISSING",
+    "MANIFEST_PAGE_EXECUTION_INCOMPLETE",
+    "MANIFEST_PAGE_EXECUTION_NOT_SINGLE_PAGE",
+    "MANIFEST_PAGE_APPROVAL_MISSING",
+    "MANIFEST_BATCH_FINAL_DELIVERY_FORBIDDEN",
+    "MANIFEST_FINAL_MERGE_MISSING",
+    "MANIFEST_FINAL_MERGE_REGENERATED_PAGES",
+    "MANIFEST_MERGE_REGRESSION_MISSING",
+    "MANIFEST_MERGE_REGRESSION_FAILED",
     "VISUAL_QA_NOT_PROVIDED",
     "VISUAL_QA_INVALID",
     "VISUAL_QA_SLIDE_MISSING",
@@ -283,6 +302,96 @@ def manifest_requires_visual_qa(manifest: dict[str, Any] | None) -> bool:
         if qa.get("visual_qa_required") is True:
             return True
     return False
+
+
+def manifest_has_visual_semantics(manifest: dict[str, Any] | None) -> bool:
+    if manifest is None:
+        return False
+    for entry in manifest.get("slides", []):
+        if not isinstance(entry, dict):
+            continue
+        qa = entry.get("qa_expectations") if isinstance(entry.get("qa_expectations"), dict) else {}
+        if qa.get("visual_semantics_required") is True:
+            return True
+    return False
+
+
+def manifest_is_high_fidelity(manifest: dict[str, Any] | None) -> bool:
+    if manifest is None:
+        return False
+    raw_value = str(manifest.get("fidelity_requirement", "")).strip().lower()
+    if raw_value in HIGH_FIDELITY_VALUES:
+        return True
+    if manifest.get("high_fidelity_required") is True:
+        return True
+    return manifest_has_visual_semantics(manifest)
+
+
+def validate_manifest(manifest: dict[str, Any] | None) -> list[dict[str, Any]]:
+    warnings: list[dict[str, Any]] = []
+    if manifest is None:
+        return warnings
+
+    slides = [entry for entry in manifest.get("slides", []) if isinstance(entry, dict)]
+    high_fidelity = manifest_is_high_fidelity(manifest)
+    delivery_mode = str(manifest.get("delivery_mode", "")).strip().lower()
+
+    if high_fidelity and len(slides) > 1 and delivery_mode in {
+        "batch_final_deck",
+        "batch",
+        "full_deck_generation",
+        "one_shot_final",
+    }:
+        warnings.append(
+            issue(
+                "MANIFEST_BATCH_FINAL_DELIVERY_FORBIDDEN",
+                "High-fidelity stage 3 delivery cannot be one-shot batch generation; pages must be made, rendered, and approved one at a time.",
+            )
+        )
+
+    if high_fidelity and len(slides) > 1:
+        final_merge = manifest.get("final_merge")
+        if not isinstance(final_merge, dict):
+            warnings.append(
+                issue(
+                    "MANIFEST_FINAL_MERGE_MISSING",
+                    "Final deck must declare a merge of already approved single-page PPTX files.",
+                )
+            )
+        else:
+            if (
+                final_merge.get("method") != "merge_approved_single_page_pptx"
+                or final_merge.get("regenerated_pages") is True
+            ):
+                warnings.append(
+                    issue(
+                        "MANIFEST_FINAL_MERGE_REGENERATED_PAGES",
+                        "Final merge must not regenerate, re-layout, redraw, or rasterize approved pages.",
+                    )
+                )
+            source_pages = final_merge.get("source_single_page_pptx")
+            if not isinstance(source_pages, list) or len(source_pages) != len(slides):
+                warnings.append(
+                    issue(
+                        "MANIFEST_FINAL_MERGE_MISSING",
+                        "Final merge must list one approved single-page PPTX source for every slide.",
+                    )
+                )
+            if final_merge.get("merge_regression_rendered") is not True:
+                warnings.append(
+                    issue(
+                        "MANIFEST_MERGE_REGRESSION_MISSING",
+                        "Merged deck must be rendered for regression QA against approved single-page renders.",
+                    )
+                )
+            if final_merge.get("merge_regression_pass") is not True:
+                warnings.append(
+                    issue(
+                        "MANIFEST_MERGE_REGRESSION_FAILED",
+                        "Merged deck regression QA must pass before final delivery.",
+                    )
+                )
+    return warnings
 
 
 def manifest_ref_exists(value: Any, manifest_dir: Path | None = None) -> bool:
@@ -443,6 +552,60 @@ def validate_manifest_slide(
                     issue(
                         "MANIFEST_PYTHON_PPTX_FALLBACK_UNJUSTIFIED",
                         "python-pptx fallback requires a concrete reason; it cannot be chosen to simplify blueprint reconstruction.",
+                        slide=slide_number,
+                    )
+                )
+        page_execution = entry.get("page_execution")
+        if not isinstance(page_execution, dict):
+            warnings.append(
+                issue(
+                    "MANIFEST_PAGE_EXECUTION_MISSING",
+                    "visual_semantics_required=true requires page_execution metadata for single-page making and approval.",
+                    slide=slide_number,
+                )
+            )
+        else:
+            required_page_fields = (
+                "mode",
+                "single_page_pptx_path",
+                "blueprint_render_path",
+                "ppt_render_path",
+                "side_by_side_path",
+                "local_comparison_artifacts",
+                "page_status",
+                "user_confirmed",
+                "made_before_next_slide",
+            )
+            missing_page_fields = [
+                field
+                for field in required_page_fields
+                if page_execution.get(field) in (None, "", [], {})
+            ]
+            if missing_page_fields or not isinstance(page_execution.get("local_comparison_artifacts"), list):
+                warnings.append(
+                    issue(
+                        "MANIFEST_PAGE_EXECUTION_INCOMPLETE",
+                        f"page_execution is missing: {', '.join(missing_page_fields)}.",
+                        slide=slide_number,
+                    )
+                )
+            if page_execution.get("mode") != "single_page":
+                warnings.append(
+                    issue(
+                        "MANIFEST_PAGE_EXECUTION_NOT_SINGLE_PAGE",
+                        "Stage 3 high-fidelity production must make one single-page PPTX at a time.",
+                        slide=slide_number,
+                    )
+                )
+            if (
+                page_execution.get("page_status") != "approved"
+                or page_execution.get("user_confirmed") is not True
+                or page_execution.get("made_before_next_slide") is not True
+            ):
+                warnings.append(
+                    issue(
+                        "MANIFEST_PAGE_APPROVAL_MISSING",
+                        "A page must be approved by the user before the next page is made or final merge begins.",
                         slide=slide_number,
                     )
                 )
@@ -1224,6 +1387,7 @@ def validate_pptx(
         report["errors"].extend(manifest_errors)
         if manifest is None:
             return report
+        report["warnings"].extend(validate_manifest(manifest))
 
     if visual_qa_path is not None:
         visual_qa, visual_qa_errors = load_visual_qa(visual_qa_path)
