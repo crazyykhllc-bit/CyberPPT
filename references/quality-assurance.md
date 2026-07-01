@@ -38,6 +38,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - `generation_engine` 是否完整，是否使用 PptxGenJS / pptx-generator；若使用 `python-pptx`、HTML 转 PPT、截图转 PPT 或其他正式生成引擎，直接失败；
 - 完整页面 PPTX 是否能被 PowerPoint 打开并成功导出 PNG；ZIP/结构预检通过不能替代 PowerPoint 兼容通过；
 - slide XML 中是否存在零尺寸、负尺寸、负坐标、异常 ext/off、非法透明度或非法线宽对象；
+- 通用图标是否优先来自 `assets/icons/` 图标库，是否锁定单一 stylistic library，是否登记 `icon_id`、`source_library`、`svg_path`、`viewBox` 和 PowerPoint 渲染验证；
 - `page_execution` 是否完整，是否记录单页 PPTX、蓝图图、PPT 渲染图、side-by-side、局部对照、用户确认和 `made_before_next_slide=true`；
 - 多页高保真交付是否声明 `final_merge`，且合并方式是否为导入已通过单页 PPTX，而不是重新生成页面；
 - manifest 中每个 `text_objects.role` 是否属于固定 Typography Scale（`C0`, `T1-T14`），`font_size_pt` 是否达到对应下限；
@@ -145,6 +146,8 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 缺少 `page_execution`、不是 `mode=single_page`、当前页未经用户确认、或未证明“确认后才进入下一页”，视为 Critical，不得生成下一页或交付。
 - 高保真多页终版使用一次性批量生成，或先批量生成完整 PPTX 再事后补写 manifest/visual QA/side-by-side，视为 Critical，不得交付。
 - 最终合并重新生成页面、重新排版、重新绘制图表、重新套用背景、使用单页渲染图作为整页背景，或缺少合并后回归验证，视为 Critical，不得交付。
+- 通用图标未优先使用 `assets/icons/`，而是临时手写复杂 SVG，导致断线、不连续、渲染异常或风格漂移，视为 High/Critical；必须改用图标库或登记 `custom_icon_required=true` 并走追踪门。
+- 同一页面或同一套 PPT 混用多个通用图标 stylistic library，视为 High；必须统一到已锁定图标库。`simple-icons` 只允许作为真实品牌 logo 例外。
 
 ## 图片资产判定
 

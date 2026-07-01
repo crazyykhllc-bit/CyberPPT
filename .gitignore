@@ -39,6 +39,8 @@ build/
 !assets/
 !assets/palette-samples/
 !assets/palette-samples/*.png
+!assets/icons/
+!assets/icons/**/*.svg
 
 # Project-specific working directories
 deck/

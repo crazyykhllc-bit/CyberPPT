@@ -84,3 +84,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 ## 라이선스
 
 MIT. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
+
+## Acknowledgments
+
+[SVG Repo](https://www.svgrepo.com/) · [Tabler Icons](https://github.com/tabler/tabler-icons) · [Simple Icons](https://github.com/simple-icons/simple-icons) · [Phosphor Icons](https://github.com/phosphor-icons/core) · [Robin Williams](https://en.wikipedia.org/wiki/Robin_Williams_(designer)) (CRAP principles)
