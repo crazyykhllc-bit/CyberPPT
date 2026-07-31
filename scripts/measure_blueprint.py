@@ -41,7 +41,7 @@ def convert_bbox(bbox: dict[str, Any], scale_x: float, scale_y: float) -> dict[s
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Create/validate a CyberPPT visual_element_registry.")
+    parser = argparse.ArgumentParser(description="Create/validate a PengyuyanPPT_Skill visual_element_registry.")
     parser.add_argument("--blueprint", required=True, help="Approved blueprint PNG.")
     parser.add_argument("--annotations", help="Manual/AI element annotation JSON with elements array.")
     parser.add_argument("--out", required=True, help="Output visual element registry JSON.")
@@ -80,7 +80,7 @@ def main() -> int:
         failures.append("manual element annotations are required; automatic full-element detection is not reliable")
 
     registry = {
-        "schema": "cyberppt.visual_element_registry.v1",
+        "schema": "pengyuyanppt_skill.visual_element_registry.v1",
         "blueprint_path": str(blueprint),
         "blueprint_sha256": sha256_file(blueprint),
         "blueprint_canvas_px": {"w": width, "h": height},

@@ -1,4 +1,4 @@
 interface:
-  display_name: "CyberPPT"
-  short_description: "生成基于证据、可编辑的咨询风格 PPT"
-  default_prompt: "使用 $cyber-ppt，把我的源文档转成高密度、可编辑的咨询风格 PPT。"
+  display_name: "PengyuyanPPT_Skill"
+  short_description: "先交付可用样板，再按 A/B 标准批量生成 PPT"
+  default_prompt: "使用 $pengyuyan-ppt-skill，把内容或蓝图生成可编辑 PPTX：先交付一张 A 版样板并暂停，我确认 A 或 B 后再批量完成其余页面。"

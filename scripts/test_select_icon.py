@@ -13,7 +13,7 @@ SCRIPT_PATH = Path(__file__).with_name("select_icon.py")
 def load_script():
     if not SCRIPT_PATH.exists():
         raise AssertionError(f"script is missing: {SCRIPT_PATH}")
-    spec = importlib.util.spec_from_file_location("cyber_ppt_select_icon", SCRIPT_PATH)
+    spec = importlib.util.spec_from_file_location("pengyuyan_ppt_skill_select_icon", SCRIPT_PATH)
     if spec is None or spec.loader is None:
         raise AssertionError("unable to load select_icon module")
     module = importlib.util.module_from_spec(spec)
@@ -51,7 +51,7 @@ class SelectIconTests(unittest.TestCase):
             index_path = Path(temp_dir) / "index.json"
             module.write_json(index_path, index)
             loaded = json.loads(index_path.read_text(encoding="utf-8"))
-            self.assertEqual("cyberppt.icon_index.v1", loaded["schema"])
+            self.assertEqual("pengyuyanppt_skill.icon_index.v1", loaded["schema"])
 
 
 if __name__ == "__main__":

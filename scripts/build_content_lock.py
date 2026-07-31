@@ -42,7 +42,7 @@ def build_content_lock(slide: dict[str, Any], source_path: Path) -> dict[str, An
     ]
     missing = [field for field in required if field not in slide]
     return {
-        "schema": "cyberppt.slide_content_lock.v1",
+        "schema": "pengyuyanppt_skill.slide_content_lock.v1",
         "slide": slide.get("slide"),
         "source_outline": str(source_path),
         "source_outline_sha256": sha256_file(source_path),
@@ -62,7 +62,7 @@ def build_content_lock(slide: dict[str, Any], source_path: Path) -> dict[str, An
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Create a CyberPPT slide_content_lock JSON.")
+    parser = argparse.ArgumentParser(description="Create a PengyuyanPPT_Skill slide_content_lock JSON.")
     parser.add_argument("--outline", required=True, help="Confirmed stage-1 outline/evidence JSON.")
     parser.add_argument("--slide", required=True, type=int, help="Slide number to lock.")
     parser.add_argument("--out", required=True, help="Output content lock JSON.")

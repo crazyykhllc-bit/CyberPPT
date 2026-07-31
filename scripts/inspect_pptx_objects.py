@@ -28,7 +28,7 @@ def bounds(element: ET.Element) -> tuple[int, int, int, int] | None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Inspect CyberPPT PPTX object structure.")
+    parser = argparse.ArgumentParser(description="Inspect PengyuyanPPT_Skill PPTX object structure.")
     parser.add_argument("pptx")
     parser.add_argument("--out", required=True)
     args = parser.parse_args()

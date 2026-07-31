@@ -95,7 +95,7 @@ def main() -> int:
         overlay.save(overlay_path)
 
     report = {
-        "schema": "cyberppt.render_compare.v1",
+        "schema": "pengyuyanppt_skill.render_compare.v1",
         "blueprint_path": str(blueprint_path),
         "render_path": str(render_path),
         "registry_path": str(registry_path),

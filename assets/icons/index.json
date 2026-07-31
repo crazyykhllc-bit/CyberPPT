@@ -1,5 +1,5 @@
 {
-  "schema": "cyberppt.icon_index.v1",
+  "schema": "pengyuyanppt_skill.icon_index.v1",
   "icons_root": "assets\\icons",
   "icon_count": 11631,
   "libraries": [

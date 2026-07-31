@@ -39,7 +39,7 @@ def validate_components(components: Any) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Create a CyberPPT blueprint_component_signature JSON.")
+    parser = argparse.ArgumentParser(description="Create a PengyuyanPPT_Skill blueprint_component_signature JSON.")
     parser.add_argument("--blueprint", required=True, help="Approved blueprint PNG.")
     parser.add_argument("--content-lock", required=True, help="Frozen slide_content_lock JSON.")
     parser.add_argument("--components", required=True, help="Component annotation JSON with a components array.")
@@ -55,7 +55,7 @@ def main() -> int:
     failures = validate_components(components)
 
     signature = {
-        "schema": "cyberppt.blueprint_component_signature.v1",
+        "schema": "pengyuyanppt_skill.blueprint_component_signature.v1",
         "slide": args.slide,
         "locked": not failures,
         "blueprint_path": str(blueprint),

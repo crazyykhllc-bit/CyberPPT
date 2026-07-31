@@ -1,14 +1,14 @@
-# CyberPPT
+# PengyuyanPPT_Skill
 
 [简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
 
-CyberPPT es un Codex Skill para convertir documentos, materiales de investigación y datos de negocio en presentaciones PowerPoint de alta densidad, editables y con estilo de consultoría.
+PengyuyanPPT_Skill es un Codex Skill para convertir documentos, materiales de investigación y datos de negocio en presentaciones PowerPoint de alta densidad, editables y con estilo de consultoría.
 
 Casos adecuados: PPT de consultoría con alta densidad de información, incluyendo investigación sectorial, análisis de consumo, estrategia de marca, análisis de e-commerce, investigación de usuarios, informes ejecutivos, materiales para consejo, propuestas a clientes y retrospectivas de proyecto.
 
 No es adecuado para presentaciones de baja densidad y poco texto, discursos, expresión personal, narrativa, intercambio informal o PPT de opinión.
 
-CyberPPT no es una plantilla. Convierte las fuentes en una cadena de evidencia auditable y usa lógica SCR, planificación de densidad, blueprints visuales y gates estrictos para generar PPTX editables y fieles al diseño.
+PengyuyanPPT_Skill no es una plantilla. Convierte las fuentes en una cadena de evidencia auditable y usa lógica SCR, planificación de densidad, blueprints visuales y gates estrictos para generar PPTX editables y fieles al diseño.
 
 ## **Cómo usarlo (¡lectura obligatoria!)**
 
@@ -18,17 +18,17 @@ La creación correcta de un PPT se divide en tres etapas:
 
 **1. Analizar los materiales de origen.**
 
-- Sube tus documentos e indica claramente a Codex: «Usa el Skill CyberPPT de la carpeta XX para crear un PPT basado en los documentos/materiales subidos», junto con cualquier requisito adicional. En esta etapa, CyberPPT analiza los materiales y genera un expediente de evidencias.
+- Sube tus documentos e indica claramente a Codex: «Usa el Skill PengyuyanPPT_Skill de la carpeta XX para crear un PPT basado en los documentos/materiales subidos», junto con cualquier requisito adicional. En esta etapa, PengyuyanPPT_Skill analiza los materiales y genera un expediente de evidencias.
 
-- Nota: CyberPPT analiza automáticamente los materiales y determina cuántas diapositivas son necesarias. Si lo prefieres, también puedes especificar el número de diapositivas.
+- Nota: PengyuyanPPT_Skill analiza automáticamente los materiales y determina cuántas diapositivas son necesarias. Si lo prefieres, también puedes especificar el número de diapositivas.
 
 **2. Elegir un estilo y crear los blueprints.**
 
-- CyberPPT presenta 8 estilos integrados. Después de elegir uno, pasa al proceso de generación de blueprints y crea de una sola vez los blueprints de todas las diapositivas. En este punto, los blueprints todavía no son editables.
+- PengyuyanPPT_Skill presenta 8 estilos integrados. Después de elegir uno, pasa al proceso de generación de blueprints y crea de una sola vez los blueprints de todas las diapositivas. En este punto, los blueprints todavía no son editables.
 
 **3. Generar el PPT editable.**
 
-- En esta etapa, CyberPPT recrea los blueprints diapositiva por diapositiva. La atención de la IA puede dispersarse; si empieza a recrear todas las diapositivas a la vez, detenla inmediatamente y dile: «Sigue estrictamente el Skill y recrea las diapositivas una por una». De lo contrario, puede tomar atajos y producir únicamente diseños esquemáticos. Si una diapositiva recreada se desvía del blueprint, señala el problema en cuanto aparezca (**las capturas de pantalla anotadas con flechas funcionan mejor**). Las dos primeras diapositivas suelen requerir más tiempo y son más propensas a errores. Este ajuste inicial es inevitable, pero, una vez afinado el flujo de trabajo, CyberPPT trabajará cada vez más rápido y ofrecerá mejores resultados.
+- En esta etapa, PengyuyanPPT_Skill recrea los blueprints diapositiva por diapositiva. La atención de la IA puede dispersarse; si empieza a recrear todas las diapositivas a la vez, detenla inmediatamente y dile: «Sigue estrictamente el Skill y recrea las diapositivas una por una». De lo contrario, puede tomar atajos y producir únicamente diseños esquemáticos. Si una diapositiva recreada se desvía del blueprint, señala el problema en cuanto aparezca (**las capturas de pantalla anotadas con flechas funcionan mejor**). Las dos primeras diapositivas suelen requerir más tiempo y son más propensas a errores. Este ajuste inicial es inevitable, pero, una vez afinado el flujo de trabajo, PengyuyanPPT_Skill trabajará cada vez más rápido y ofrecerá mejores resultados.
 
 **Notas finales**
 
@@ -38,7 +38,7 @@ La creación correcta de un PPT se divide en tres etapas:
 
 - Extraer evidencia, hechos, números, juicios, recomendaciones y caveats desde DOCX, PDF, TXT, XLSX, informes, materiales de negocio y datos brutos.
 - Crear una tabla de evidencia con estándar MBB antes del brainstorming de storyline, la convergencia SCR y el plan de páginas.
-- Ofrecer 8 estilos visuales fijos de CyberPPT, cada uno con una muestra independiente 16:9.
+- Ofrecer 8 estilos visuales fijos de PengyuyanPPT_Skill, cada uno con una muestra independiente 16:9.
 - Generar blueprints ImageGen página por página para fijar composición, jerarquía, densidad, paleta y lenguaje gráfico.
 - Producir PPTX con una estrategia híbrida: fidelidad visual compleja e información principal editable.
 - Ejecutar QA estructural, QA visual, QA de editabilidad, QA de overflow, QA de registro espacial y QA de trazado de curvas.
@@ -65,7 +65,7 @@ La creación correcta de un PPT se divide en tres etapas:
 
 ## Sistema de gates
 
-CyberPPT incluye varios gates estrictos para evitar decks que parecen terminados pero fallan en evidencia, densidad, editabilidad o fidelidad visual.
+PengyuyanPPT_Skill incluye varios gates estrictos para evitar decks que parecen terminados pero fallan en evidencia, densidad, editabilidad o fidelidad visual.
 
 | Gate | Qué verifica | Si falla |
 |---|---|---|
@@ -88,16 +88,16 @@ Principio clave: editabilidad y fidelidad visual tienen el mismo peso. Pasar str
 
 ## Instalación
 
-Usa Git para instalar CyberPPT en el directorio de skills de Codex y conserva el nombre instalado como `cyber-ppt`. La raíz debe contener `SKILL.md`.
+Usa Git para instalar PengyuyanPPT_Skill en el directorio de skills de Codex y conserva el nombre instalado como `pengyuyan-ppt-skill`. La raíz debe contener `SKILL.md`.
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\cyber-ppt"
+git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 ```
 
 ## Actualización
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\cyber-ppt"
+cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 

@@ -2078,9 +2078,9 @@ def build_parser() -> argparse.ArgumentParser:
         description="Check PPTX structure, aspect ratio, editability, placeholders, and layout risks."
     )
     parser.add_argument("pptx", help="Path to the PPTX file")
-    parser.add_argument("--manifest", help="CyberPPT stage 3 slide_manifest.json")
-    parser.add_argument("--visual-qa", help="CyberPPT stage 3 visual_qa_gate.json")
-    parser.add_argument("--strict", action="store_true", help="Promote CyberPPT hard-rule violations to errors")
+    parser.add_argument("--manifest", help="PengyuyanPPT_Skill stage 3 slide_manifest.json")
+    parser.add_argument("--visual-qa", help="PengyuyanPPT_Skill stage 3 visual_qa_gate.json")
+    parser.add_argument("--strict", action="store_true", help="Promote PengyuyanPPT_Skill hard-rule violations to errors")
     parser.add_argument("--json-out", help="Optional path for a UTF-8 JSON report")
     return parser
 

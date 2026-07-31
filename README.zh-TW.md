@@ -1,14 +1,14 @@
-# CyberPPT
+# PengyuyanPPT_Skill
 
 [简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
 
-CyberPPT 是一個 Codex Skill，用於把文件、研究材料和業務資料轉化為高密度、可編輯、顧問風格的 PowerPoint 簡報。
+PengyuyanPPT_Skill 是一個 Codex Skill，用於把文件、研究材料和業務資料轉化為高密度、可編輯、顧問風格的 PowerPoint 簡報。
 
 適用場景：顧問風格 PPT，高資訊密度，包括產業研究、消費品分析、品牌策略、電商分析、使用者研究、高階主管匯報、董事會材料、客戶提案和專案復盤。
 
 不適用場景：字少的低資訊密度風格，包括演講、個人風格表達、敘事、分享、觀點類 PPT。
 
-CyberPPT 的核心不是「套範本」，而是把來源材料先轉成可稽核證據鏈，再透過 SCR 論證、頁面密度規劃、視覺藍圖和嚴格門禁，生成可編輯且高保真的顧問式 PPTX。
+PengyuyanPPT_Skill 的核心不是「套範本」，而是把來源材料先轉成可稽核證據鏈，再透過 SCR 論證、頁面密度規劃、視覺藍圖和嚴格門禁，生成可編輯且高保真的顧問式 PPTX。
 
 ## **使用方法（必看！）**
 
@@ -18,9 +18,9 @@ CyberPPT 的核心不是「套範本」，而是把來源材料先轉成可稽�
 
 **1. 資料分析。**
 
-- 上傳你的資料文件，並明確告訴 Codex：「使用 XX 資料夾下的 CyberPPT 這個 Skill，根據上傳的文件／資料製作一份 PPT。」以及其他補充要求。這個階段會分析你的資料並產出證據底稿。
+- 上傳你的資料文件，並明確告訴 Codex：「使用 XX 資料夾下的 PengyuyanPPT_Skill 這個 Skill，根據上傳的文件／資料製作一份 PPT。」以及其他補充要求。這個階段會分析你的資料並產出證據底稿。
 
-- 備註：CyberPPT 會自動分析並確認需要製作多少頁；如需指定頁數，也可以直接提出。
+- 備註：PengyuyanPPT_Skill 會自動分析並確認需要製作多少頁；如需指定頁數，也可以直接提出。
 
 **2. 選擇風格並製作藍圖。**
 
@@ -38,7 +38,7 @@ CyberPPT 的核心不是「套範本」，而是把來源材料先轉成可稽�
 
 - 從 DOCX、PDF、TXT、XLSX、研究報告、業務材料和原始資料中提取證據、事實、數字、判斷和 caveat。
 - 建立 MBB 標準證據表，再做內容腦暴、故事線比較、SCR 收斂和逐頁頁面計劃。
-- 預設提供 8 種固定 CyberPPT 視覺風格，每種風格都有獨立 16:9 樣張。
+- 預設提供 8 種固定 PengyuyanPPT_Skill 視覺風格，每種風格都有獨立 16:9 樣張。
 - 生成完整逐頁 ImageGen 藍圖，用於鎖定構圖、層級、密度、色板和圖表語言。
 - 使用「複雜視覺保真 + 主要文字可編輯」的混合還原策略生成 PPTX。
 - 執行結構 QA、視覺 QA、可編輯性 QA、容器溢出 QA、空間錨點 QA 和曲線追蹤 QA。
@@ -65,7 +65,7 @@ CyberPPT 的核心不是「套範本」，而是把來源材料先轉成可稽�
 
 ## 門禁機制
 
-CyberPPT 內建多層門禁，防止「檔案生成了，但證據、密度、可編輯性或視覺還原不合格」。
+PengyuyanPPT_Skill 內建多層門禁，防止「檔案生成了，但證據、密度、可編輯性或視覺還原不合格」。
 
 | 門禁 | 檢查什麼 | 失敗後怎麼處理 |
 |---|---|---|
@@ -89,16 +89,16 @@ CyberPPT 內建多層門禁，防止「檔案生成了，但證據、密度、�
 
 ## 安裝
 
-使用 Git 將 CyberPPT 安裝到 Codex skills 目錄，並保持目錄名為 `cyber-ppt`。資料夾根目錄必須包含 `SKILL.md`。
+使用 Git 將 PengyuyanPPT_Skill 安裝到 Codex skills 目錄，並保持目錄名為 `pengyuyan-ppt-skill`。資料夾根目錄必須包含 `SKILL.md`。
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\cyber-ppt"
+git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 ```
 
 ## 更新
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\cyber-ppt"
+cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 

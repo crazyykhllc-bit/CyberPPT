@@ -1,14 +1,14 @@
-# CyberPPT
+# PengyuyanPPT_Skill
 
 [简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
 
-CyberPPT は、文書、調査資料、業務データを、高密度で編集可能なコンサルティングスタイルの PowerPoint プレゼンテーションに変換するための Codex Skill です。
+PengyuyanPPT_Skill は、文書、調査資料、業務データを、高密度で編集可能なコンサルティングスタイルの PowerPoint プレゼンテーションに変換するための Codex Skill です。
 
 適用場面：高い情報密度が必要なコンサルティング型 PPT。業界調査、消費者分析、ブランド戦略、EC 分析、ユーザー調査、経営層向け報告、取締役会資料、顧客提案、プロジェクト振り返りなど。
 
 適さない場面：文字量が少ない低密度の発表、個人的表現、物語型共有、意見中心の PPT。
 
-CyberPPT は単なるテンプレートではありません。ソース資料を監査可能な証拠チェーンに変換し、SCR 論理、ページ密度設計、視覚ブループリント、厳格なゲートによって、編集可能で高忠実度な PPTX を作成します。
+PengyuyanPPT_Skill は単なるテンプレートではありません。ソース資料を監査可能な証拠チェーンに変換し、SCR 論理、ページ密度設計、視覚ブループリント、厳格なゲートによって、編集可能で高忠実度な PPTX を作成します。
 
 ## **使用方法（必読）**
 
@@ -18,9 +18,9 @@ CyberPPT は単なるテンプレートではありません。ソース資料�
 
 **1. 資料を分析する。**
 
-- 資料ファイルをアップロードし、Codex に「XX フォルダー内の CyberPPT Skill を使用して、アップロードした文書／資料を基に PPT を作成してください」と明確に伝え、必要に応じて追加要件も指定します。この段階では資料を分析し、証拠ベースの下書きを作成します。
+- 資料ファイルをアップロードし、Codex に「XX フォルダー内の PengyuyanPPT_Skill Skill を使用して、アップロードした文書／資料を基に PPT を作成してください」と明確に伝え、必要に応じて追加要件も指定します。この段階では資料を分析し、証拠ベースの下書きを作成します。
 
-- 注：CyberPPT は資料を自動で分析し、必要なスライド数を判断します。必要であれば、スライド数を指定することもできます。
+- 注：PengyuyanPPT_Skill は資料を自動で分析し、必要なスライド数を判断します。必要であれば、スライド数を指定することもできます。
 
 **2. スタイルを選び、ブループリントを作成する。**
 
@@ -38,7 +38,7 @@ CyberPPT は単なるテンプレートではありません。ソース資料�
 
 - DOCX、PDF、TXT、XLSX、調査レポート、業務資料、原データから証拠、事実、数値、判断、caveat を抽出。
 - MBB 標準の証拠表を作成し、ストーリーライン比較、SCR 収束、ページ計画に進む。
-- 8 種類の固定 CyberPPT ビジュアルスタイルを提供し、それぞれ独立した 16:9 サンプル画像を持つ。
+- 8 種類の固定 PengyuyanPPT_Skill ビジュアルスタイルを提供し、それぞれ独立した 16:9 サンプル画像を持つ。
 - ページごとの ImageGen ブループリントで、構図、階層、密度、色、図表言語を固定。
 - 「複雑な視覚表現の忠実度 + 主要文字の編集可能性」のハイブリッド方式で PPTX を生成。
 - 構造 QA、視覚 QA、編集可能性 QA、オーバーフロー QA、空間アンカー QA、曲線トレース QA を実行。
@@ -65,7 +65,7 @@ CyberPPT は単なるテンプレートではありません。ソース資料�
 
 ## ゲート機構
 
-CyberPPT は、完成したように見えても証拠、密度、編集可能性、視覚再現性が不足することを防ぐため、複数のハードゲートを持ちます。
+PengyuyanPPT_Skill は、完成したように見えても証拠、密度、編集可能性、視覚再現性が不足することを防ぐため、複数のハードゲートを持ちます。
 
 | ゲート | 確認内容 | 失敗時 |
 |---|---|---|
@@ -88,16 +88,16 @@ CyberPPT は、完成したように見えても証拠、密度、編集可能�
 
 ## インストール
 
-Git を使って CyberPPT を Codex skills ディレクトリにインストールし、インストール先のフォルダー名を `cyber-ppt` にします。ルートには必ず `SKILL.md` が必要です。
+Git を使って PengyuyanPPT_Skill を Codex skills ディレクトリにインストールし、インストール先のフォルダー名を `pengyuyan-ppt-skill` にします。ルートには必ず `SKILL.md` が必要です。
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\cyber-ppt"
+git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 ```
 
 ## 更新
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\cyber-ppt"
+cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 

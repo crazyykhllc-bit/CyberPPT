@@ -1,14 +1,14 @@
-# CyberPPT
+# PengyuyanPPT_Skill
 
 [简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
 
-CyberPPT is a Codex Skill for turning documents, research materials, and business data into high-density, editable, consulting-style PowerPoint presentations.
+PengyuyanPPT_Skill is a Codex Skill for turning documents, research materials, and business data into high-density, editable, consulting-style PowerPoint presentations.
 
 Best for consulting-style decks with high information density: industry research, consumer analysis, brand strategy, e-commerce analysis, user research, executive briefings, board materials, client proposals, and project retrospectives.
 
 Not for text-light, low-density decks such as speeches, personal expression, narrative sharing, or opinion-only presentations.
 
-CyberPPT is not a template wrapper. It turns source materials into an auditable evidence chain, then uses SCR logic, page density planning, visual blueprints, and strict gates to produce editable and high-fidelity consulting decks.
+PengyuyanPPT_Skill is not a template wrapper. It turns source materials into an auditable evidence chain, then uses SCR logic, page density planning, visual blueprints, and strict gates to produce editable and high-fidelity consulting decks.
 
 ## **How to Use (Must Read!)**
 
@@ -18,17 +18,17 @@ Creating a PPT properly involves three stages:
 
 **1. Analyze the source materials.**
 
-- Upload your source documents and explicitly tell Codex: “Use the CyberPPT skill in the XX folder to create a PPT based on the uploaded documents/materials,” together with any additional requirements. At this stage, it will analyze the materials and produce an evidence brief.
+- Upload your source documents and explicitly tell Codex: “Use the PengyuyanPPT_Skill skill in the XX folder to create a PPT based on the uploaded documents/materials,” together with any additional requirements. At this stage, it will analyze the materials and produce an evidence brief.
 
-- Note: CyberPPT will automatically analyze the materials and determine the number of slides. You can also specify the slide count if needed.
+- Note: PengyuyanPPT_Skill will automatically analyze the materials and determine the number of slides. You can also specify the slide count if needed.
 
 **2. Choose a style and create the blueprints.**
 
-- CyberPPT will present 8 built-in styles. Once you choose one, it enters the blueprint stage and generates blueprints for all slides in one pass. The blueprints are not editable at this point.
+- PengyuyanPPT_Skill will present 8 built-in styles. Once you choose one, it enters the blueprint stage and generates blueprints for all slides in one pass. The blueprints are not editable at this point.
 
 **3. Generate the editable PPT.**
 
-- At this stage, CyberPPT recreates the blueprints one slide at a time. AI attention can drift, so if it starts recreating all slides at once, stop it immediately and say: “Strictly follow the Skill and recreate the slides one by one.” Otherwise, it may cut corners and produce only skeletal layouts. If a recreated slide deviates from the blueprint, point out the problem when it appears (**screenshots annotated with arrows work best**). The first and second slides usually take longer and are more prone to errors. This initial calibration is unavoidable, but once the workflow is tuned, CyberPPT will become faster and produce better results.
+- At this stage, PengyuyanPPT_Skill recreates the blueprints one slide at a time. AI attention can drift, so if it starts recreating all slides at once, stop it immediately and say: “Strictly follow the Skill and recreate the slides one by one.” Otherwise, it may cut corners and produce only skeletal layouts. If a recreated slide deviates from the blueprint, point out the problem when it appears (**screenshots annotated with arrows work best**). The first and second slides usually take longer and are more prone to errors. This initial calibration is unavoidable, but once the workflow is tuned, PengyuyanPPT_Skill will become faster and produce better results.
 
 **Final notes**
 
@@ -38,7 +38,7 @@ Creating a PPT properly involves three stages:
 
 - Extract evidence, facts, numbers, claims, recommendations, and caveats from DOCX, PDF, TXT, XLSX, research reports, business materials, and raw data.
 - Build an MBB-style evidence table before storyline brainstorming, SCR convergence, and page planning.
-- Provide 8 fixed CyberPPT visual styles, each with a standalone 16:9 sample image.
+- Provide 8 fixed PengyuyanPPT_Skill visual styles, each with a standalone 16:9 sample image.
 - Generate page-by-page ImageGen blueprints to lock composition, hierarchy, density, palette, and chart language.
 - Produce PPTX files with a hybrid strategy: complex visual fidelity plus editable core information.
 - Run structural QA, visual QA, editability QA, overflow QA, spatial registration QA, and curve tracing QA.
@@ -65,7 +65,7 @@ Creating a PPT properly involves three stages:
 
 ## Gate System
 
-CyberPPT includes multiple hard gates to prevent decks that look finished but fail on evidence, density, editability, or visual fidelity.
+PengyuyanPPT_Skill includes multiple hard gates to prevent decks that look finished but fail on evidence, density, editability, or visual fidelity.
 
 | Gate | What It Checks | If It Fails |
 |---|---|---|
@@ -89,16 +89,16 @@ Key principle: editability and visual fidelity are equal hard requirements. Pass
 
 ## Installation
 
-Use Git to install CyberPPT into the Codex skills directory and keep the installed folder name as `cyber-ppt`. The root folder must contain `SKILL.md`.
+Use Git to install PengyuyanPPT_Skill into the Codex skills directory and keep the installed folder name as `pengyuyan-ppt-skill`. The root folder must contain `SKILL.md`.
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\cyber-ppt"
+git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 ```
 
 ## Update
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\cyber-ppt"
+cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 

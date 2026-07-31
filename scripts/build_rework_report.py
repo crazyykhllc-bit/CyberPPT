@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a human-readable rework report from CyberPPT QA reports."""
+"""Create a human-readable rework report from PengyuyanPPT_Skill QA reports."""
 
 from __future__ import annotations
 
@@ -14,14 +14,14 @@ def read_json(path: Path) -> Any:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build a CyberPPT rework report.")
+    parser = argparse.ArgumentParser(description="Build a PengyuyanPPT_Skill rework report.")
     parser.add_argument("--compare-report", required=True)
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
 
     report = read_json(Path(args.compare_report))
     failures = report.get("failures", []) if isinstance(report, dict) else []
-    lines = ["# CyberPPT Rework Report", ""]
+    lines = ["# PengyuyanPPT_Skill Rework Report", ""]
     if not failures:
         lines.append("No rework items reported by compare_render.py.")
     else:

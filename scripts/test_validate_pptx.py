@@ -16,7 +16,7 @@ SCRIPT_PATH = Path(__file__).with_name("validate_pptx.py")
 def load_validator():
     if not SCRIPT_PATH.exists():
         raise AssertionError(f"validator is missing: {SCRIPT_PATH}")
-    spec = importlib.util.spec_from_file_location("cyber_ppt_validate_pptx", SCRIPT_PATH)
+    spec = importlib.util.spec_from_file_location("pengyuyan_ppt_skill_validate_pptx", SCRIPT_PATH)
     if spec is None or spec.loader is None:
         raise AssertionError("unable to load validator module")
     module = importlib.util.module_from_spec(spec)

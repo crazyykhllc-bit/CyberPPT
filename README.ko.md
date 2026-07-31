@@ -1,14 +1,14 @@
-# CyberPPT
+# PengyuyanPPT_Skill
 
 [简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
 
-CyberPPT는 문서, 리서치 자료, 비즈니스 데이터를 고밀도, 편집 가능, 컨설팅 스타일의 PowerPoint 프레젠테이션으로 변환하는 Codex Skill입니다.
+PengyuyanPPT_Skill는 문서, 리서치 자료, 비즈니스 데이터를 고밀도, 편집 가능, 컨설팅 스타일의 PowerPoint 프레젠테이션으로 변환하는 Codex Skill입니다.
 
 적합한 용도: 정보 밀도가 높은 컨설팅 스타일 PPT. 산업 리서치, 소비자 분석, 브랜드 전략, 이커머스 분석, 사용자 리서치, 임원 보고, 이사회 자료, 고객 제안서, 프로젝트 리뷰 등에 적합합니다.
 
 적합하지 않은 용도: 글자가 적은 저밀도 발표, 개인적 표현, 내러티브 공유, 의견 중심 PPT.
 
-CyberPPT는 단순 템플릿이 아닙니다. 원천 자료를 감사 가능한 증거 체인으로 바꾸고, SCR 논리, 페이지 밀도 설계, 시각 블루프린트, 엄격한 게이트를 통해 편집 가능하고 고충실도의 PPTX를 만듭니다.
+PengyuyanPPT_Skill는 단순 템플릿이 아닙니다. 원천 자료를 감사 가능한 증거 체인으로 바꾸고, SCR 논리, 페이지 밀도 설계, 시각 블루프린트, 엄격한 게이트를 통해 편집 가능하고 고충실도의 PPTX를 만듭니다.
 
 ## **사용 방법(필독!)**
 
@@ -18,9 +18,9 @@ CyberPPT는 단순 템플릿이 아닙니다. 원천 자료를 감사 가능한 
 
 **1. 자료 분석.**
 
-- 자료 문서를 업로드한 뒤 Codex에 “XX 폴더의 CyberPPT Skill을 사용하여 업로드한 문서/자료를 바탕으로 PPT를 만들어 주세요”라고 명확하게 지시하고, 필요한 추가 요구 사항도 함께 전달하세요. 이 단계에서는 자료를 분석하고 근거 초안을 작성합니다.
+- 자료 문서를 업로드한 뒤 Codex에 “XX 폴더의 PengyuyanPPT_Skill Skill을 사용하여 업로드한 문서/자료를 바탕으로 PPT를 만들어 주세요”라고 명확하게 지시하고, 필요한 추가 요구 사항도 함께 전달하세요. 이 단계에서는 자료를 분석하고 근거 초안을 작성합니다.
 
-- 참고: CyberPPT는 자료를 자동으로 분석하여 필요한 슬라이드 수를 결정합니다. 필요한 경우 슬라이드 수를 직접 지정할 수도 있습니다.
+- 참고: PengyuyanPPT_Skill는 자료를 자동으로 분석하여 필요한 슬라이드 수를 결정합니다. 필요한 경우 슬라이드 수를 직접 지정할 수도 있습니다.
 
 **2. 스타일 선택 및 블루프린트 제작.**
 
@@ -38,7 +38,7 @@ CyberPPT는 단순 템플릿이 아닙니다. 원천 자료를 감사 가능한 
 
 - DOCX, PDF, TXT, XLSX, 리서치 보고서, 업무 자료, 원시 데이터에서 증거, 사실, 수치, 판단, caveat를 추출합니다.
 - MBB 표준 증거표를 만든 뒤 스토리라인 비교, SCR 수렴, 페이지 계획을 수행합니다.
-- 8가지 고정 CyberPPT 시각 스타일을 제공하며, 각 스타일은 독립적인 16:9 샘플 이미지를 가집니다.
+- 8가지 고정 PengyuyanPPT_Skill 시각 스타일을 제공하며, 각 스타일은 독립적인 16:9 샘플 이미지를 가집니다.
 - 페이지별 ImageGen 블루프린트로 구성, 계층, 밀도, 색상, 차트 언어를 고정합니다.
 - “복잡한 시각 충실도 + 주요 텍스트 편집 가능성”의 하이브리드 방식으로 PPTX를 생성합니다.
 - 구조 QA, 시각 QA, 편집 가능성 QA, 오버플로 QA, 공간 앵커 QA, 곡선 추적 QA를 수행합니다.
@@ -65,7 +65,7 @@ CyberPPT는 단순 템플릿이 아닙니다. 원천 자료를 감사 가능한 
 
 ## 게이트 시스템
 
-CyberPPT는 파일이 만들어졌더라도 증거, 밀도, 편집 가능성, 시각 재현성이 부족한 결과를 막기 위해 여러 하드 게이트를 사용합니다.
+PengyuyanPPT_Skill는 파일이 만들어졌더라도 증거, 밀도, 편집 가능성, 시각 재현성이 부족한 결과를 막기 위해 여러 하드 게이트를 사용합니다.
 
 | 게이트 | 확인 항목 | 실패 시 |
 |---|---|---|
@@ -88,16 +88,16 @@ CyberPPT는 파일이 만들어졌더라도 증거, 밀도, 편집 가능성, �
 
 ## 설치
 
-Git으로 CyberPPT를 Codex skills 디렉터리에 설치하고 설치 폴더 이름을 `cyber-ppt`로 유지합니다. 루트 폴더에는 반드시 `SKILL.md`가 있어야 합니다.
+Git으로 PengyuyanPPT_Skill를 Codex skills 디렉터리에 설치하고 설치 폴더 이름을 `pengyuyan-ppt-skill`로 유지합니다. 루트 폴더에는 반드시 `SKILL.md`가 있어야 합니다.
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\cyber-ppt"
+git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 ```
 
 ## 업데이트
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\cyber-ppt"
+cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 
