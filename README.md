@@ -1,117 +1,251 @@
-# PengyuyanPPT_Skill
+# PengyuyanPPT
 
-[简体中文](README.md) | [繁體中文](README.zh-TW.md) | [English](README.en.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Français](README.fr.md) | [Português](README.pt.md) | [Español](README.es.md) | [العربية](README.ar.md)
+> 把业务材料先变成可确认的内容与设计蓝图，再变成高信息密度、可编辑、可正常打开的 PowerPoint。
 
-PengyuyanPPT_Skill 是一个 Codex Skill，用于把文档、研究材料和业务数据转化为高密度、可编辑、咨询风格的 PowerPoint 演示文稿。
+[![Codex Skill](https://img.shields.io/badge/Codex-Skill-111827)](SKILL.md)
+[![PowerPoint](https://img.shields.io/badge/Output-Editable%20PPTX-B7472A)](#阶段-3蓝图还原为可编辑-pptx)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-适用场景：咨询风格 PPT，高信息密度，包括行业研究、消费品分析、品牌战略、电商分析、用户研究、高管汇报、董事会材料、客户提案和项目复盘。 
+[简体中文](README.md) · [繁體中文](README.zh-TW.md) · [English](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Español](README.es.md) · [العربية](README.ar.md)
 
-不适用场景：字少的低信息密度风格，包括演讲、个人风格表达、叙事、分享、观点类 PPT。
+PengyuyanPPT 是面向 Codex 的专业 PPT Skill，适合把文案、DOCX、PDF、TXT、XLSX、研究报告、业务方案或已完成的设计蓝图，转化为咨询式、高信息密度、主要内容可编辑的 PPTX。
 
-PengyuyanPPT_Skill 的核心不是“套模板”，而是把源材料先转成可审计证据链，再通过 SCR 论证、页面密度规划、视觉蓝图和严格门禁，生成可编辑且高保真的咨询式 PPTX。
+它不是简单套模板，而是把 PPT 制作拆成三个可确认阶段：
 
-## **使用方法（必看！）**
+1. 先确认讲什么；
+2. 再确认长什么样；
+3. 最后转换为可编辑 PowerPoint。
 
-**安装：复制项目地址让Codex安装Skill。**
+![蓝图与可编辑 PPTX 对照](assets/readme/stage3-editable-compare.png)
 
-正式做PPT分为三个阶段：
+## 适合什么任务
 
-**1.资料分析。**
+- 行业研究、企业战略、品牌与市场分析；
+- 高管汇报、董事会材料、客户提案与项目复盘；
+- 知识管理、AI 解决方案、数字化转型与产品方案；
+- 已有 PPT 截图、设计稿或 ImageGen 蓝图的可编辑还原；
+- 多页、高密度、强调结论与证据的业务演示文稿。
 
--上传你的资料文档，明确告诉Codex：“使用XX文件夹下的PengyuyanPPT_Skill这个skill，根据上传的文档/资料做一份PPT。”以及其他补充的要求。这个阶段会分析你的资料，出证据底稿。
+对于演讲型、极简型、个人叙事型 PPT，也可以指定风格使用，但本 Skill 默认更擅长业务信息密集型页面。
 
--备注：这里它会自动分析、确认做多少页，如果你要指定，也可以指定。
+## 两种使用入口
 
-**2.选择风格和制作蓝图。**
+| 入口 | 你提供什么 | 执行路径 | 最终输出 |
+|---|---|---|---|
+| 内容到 PPT | 文案、文档、数据、报告、业务材料 | 阶段 1 → 阶段 2 → 阶段 3 | 完整可编辑 PPTX |
+| 蓝图到 PPT | 完整设计稿、幻灯片截图、Image2/ImageGen 蓝图 | 快速锁定内容与视觉 → 阶段 3 | 按蓝图还原的可编辑 PPTX |
 
--这里会有8种内置的风格供你选择，选完以后，进入生成蓝图流程，会一次性把所有页面的蓝图做出来，这里还不可以编辑。
+材料和蓝图同时存在时：材料锁定事实，蓝图锁定视觉。
 
-**3.生成可编辑的PPT。**
+## 三阶段工作流
 
--这一阶段会把蓝图挨个还原，特别要注意，AI的注意力会分散，如果你发现它在一次性把全部还原，立即停下，告诉它：“严格按照Skill逐页还原。”否则它会偷懒，只出骨架图。如果逐页还原结果有偏差，可以在出现问题的时候指出（**用标箭头截图的方式最好**），一般第一页和第二页会花比较久、也容易出错，这是第一次跑任务磨合不可避免的，但是一旦你调教好，它会越做越快越做越好。
+### 阶段 1：证据、故事线与页面大纲
 
-**最后说明**
+先读懂材料，不急着画页面。
 
--必须经过三个阶段不可跳过，才能保证该Skill能还原蓝图的90%左右，最难还原的是曲线图表，如果你发现跑偏了，可以截图让Codex精细还原。小图标AI容易给错，可以指出问题让AI重新给。剩下的换行、字体大小的问题，可以自己编辑调整，不要试图追求100%完美还原，能做到，但是有随机性（即抽卡），有时候能一次性搞定，有的时候会有一些跑偏。如果一定要让AI达到100%，花费的调试过程、Token会比较多，但建议还是：**AI搞定90%，剩下10%自己搞定**，否则直接用蓝图就可以了。
+- 提取事实、数字、单位、期间、来源和 caveat；
+- 生成并比较 2–3 条故事线；
+- 使用 SCR、issue tree 或 hypothesis tree 收敛逻辑；
+- 确认页数、逐页结论、图表计划、信息密度和组件清单。
+
+**阶段输出：** 可确认的故事线与逐页内容大纲。
+
+![阶段 1：大纲确认](assets/readme/stage1-outline-confirmation.png)
+
+### 阶段 2：视觉方向与整套高清蓝图
+
+先确认一张代表蓝图，再生成整套蓝图。
+
+- 8 种内置风格只作为参考，不是强制限制；
+- 可以指定企业模板、品牌色、参考图或任意 Image2/ImageGen 风格；
+- 代表页确认后固化色板、字体、网格、组件、图标与信息密度；
+- 必须先输出并确认全部页面蓝图，不能边做蓝图边制作 PPTX。
+
+**阶段输出：** 每页独立高清蓝图、整套缩略图总览和页码清单。
+
+![阶段 2：高清蓝图](assets/readme/stage2-blueprint.png)
+
+> 代表蓝图确认，只代表视觉方向锁定；只有整套蓝图确认后，才能进入阶段 3。
+
+### 阶段 3：蓝图还原为可编辑 PPTX
+
+阶段 3 采用 A/B 两段式交付，优先把时间花在真正影响使用的部分。
+
+#### A：可用版快速交付（默认）
+
+A 版不是低保真草稿。它必须保证：
+
+- 风格、颜色、构图、排版和信息密度与蓝图基本一致；
+- 标题、正文、数字、表格、流程、图表标签和结论条可编辑；
+- 中文、字体与图标正常显示；
+- PPTX 能在 Microsoft PowerPoint 中打开且没有修复警告。
+
+第一张 A 版样板交付后立即暂停，由用户决定是否已经满足使用要求。
+
+#### B：蓝图一致性精修（可选）
+
+只有用户选择 B，才继续处理最后约 10% 的差异，例如复杂曲线、图标细节、阴影、圆角、间距、换行和局部坐标。
+
+| 档位 | 适合场景 | 默认验证 |
+|---|---|---|
+| A / fast | 业务使用优先、快速交付 | 结构、内容、可编辑性、PowerPoint 兼容性 |
+| B / standard | 需要进一步接近蓝图 | PowerPoint 渲染、蓝图对照、P0/P1 修正 |
+| precision | 像素级、品牌/UI、复杂核心几何 | 元素测量、局部差异、严格门禁 |
+
+多页任务只在第一张可编辑样板页询问一次 A/B；用户确定标准后，其余页面按同一标准批量转换并合并。
+
+## 四个确认门
+
+```text
+内容与故事线确认
+        ↓
+代表蓝图确认
+        ↓
+整套蓝图确认
+        ↓
+第一张可编辑样板 A/B 确认 → 批量生成其余页面
+```
+
+这个设计避免 AI 在故事线、视觉设计和批量还原之间同时分散注意力，也把“是否值得继续精修”的选择权交给用户。
 
 ## 核心能力
 
-- 从 DOCX、PDF、TXT、XLSX、研究报告、业务材料和原始数据中提取证据、事实、数字、判断和 caveat。
-- 建立 MBB 标准证据表，再做内容脑暴、故事线比较、SCR 收敛和逐页页面计划。
-- 默认提供 8 种固定 PengyuyanPPT_Skill 视觉风格，每种风格都有独立 16:9 样张。
-- 生成完整逐页 ImageGen 蓝图，用于锁定构图、层级、密度、色板和图表语言。
-- 使用“复杂视觉保真 + 主要文字可编辑”的混合还原策略生成 PPTX。
-- 执行结构 QA、视觉 QA、可编辑性 QA、容器溢出 QA、空间锚点 QA 和曲线追踪 QA。
+- **证据驱动：** 从多种业务材料中抽取可追溯事实，不凭蓝图或常识补造数据；
+- **咨询式表达：** 结论型标题、主体分析、证据案例、解释层和 SO WHAT；
+- **开放视觉：** 支持内置样张、用户指定风格、企业模板和任意生成式蓝图；
+- **高密度蓝图：** 不为了方便转 PPT 而降级成低保真线框；
+- **可编辑还原：** 主要文字、数字、表格、图表与流程使用 PowerPoint 原生对象；
+- **快速 A 版：** 先交付约 90% 可用状态，通过兼容性检查后暂停；
+- **按需精修：** 用户选择 B 后才启动蓝图对照和多轮一致性修正；
+- **多页复用：** 通过 `visual_master` 固化字体、色板、网格、面板和组件；
+- **稳定图标：** 项目缓存、本地聚合库、开源 SVG、PowerPoint/Fluent 与语义近似多级回退；
+- **质量校验：** 提供 PPTX 结构、对象边界、内容、可编辑性和视觉门禁脚本。
 
-## 强制流程
+## 图标策略
 
-1. 分析：建立 MBB 证据表，记录冲突、缺口和 caveat；脑暴 2-3 条故事线，收敛为 SCR、逐页大纲、图表计划、信息密度和组件清单。
-2. 蓝图：展示 8 种固定视觉风格；用户选择后锁定风格编号、色板、网格、标题层级、图表语言和页面密度，并生成逐页 ImageGen 蓝图。
-3. 还原：按蓝图制作 PPTX，区分复杂视觉资产层和可编辑信息层；用原生文本、形状、表格、图表、SVG path 或 custom geometry 重建页面。
-4. 交付：提供 PPTX、全页渲染图、`slide_manifest.json`、`visual_qa_gate.json` 和 strict QA 结果。任一关键门禁失败，不得交付确认。
+普通图标的目标是“语义准确、风格统一、PowerPoint 稳定显示”，不要求逐像素描摹。
 
-## 8 种视觉风格
+默认优先级：
 
-| 选项 | 名称 | 样张 |
-|---|---|---|
-| 01 | 经典深红咨询风 | ![Palette 01](assets/palette-samples/palette-01.png) |
-| 02 | 冷灰 + 勃艮第红 | ![Palette 02](assets/palette-samples/palette-02.png) |
-| 03 | 暖象牙白 + 暗酒红 | ![Palette 03](assets/palette-samples/palette-03.png) |
-| 04 | 象牙白 + 深蓝强调 | ![Palette 04](assets/palette-samples/palette-04.png) |
-| 05 | 浅灰白 + 墨绿 | ![Palette 05](assets/palette-samples/palette-05.png) |
-| 06 | 纸张米色 + 铜棕 | ![Palette 06](assets/palette-samples/palette-06.png) |
-| 07 | 纯净浅灰 + 黑金 | ![Palette 07](assets/palette-samples/palette-07.png) |
-| 08 | 冷白灰 + 深紫 | ![Palette 08](assets/palette-samples/palette-08.png) |
+```text
+项目缓存
+→ 本地聚合图标库
+→ 可发现的开源 SVG 库
+→ PowerPoint / Fluent 图标
+→ 同风格语义近似
+→ 必要时自绘
+```
 
-## 门禁机制
+内置风格族包括 `chunk-filled`、`tabler-filled`、`tabler-outline`、`phosphor-duotone` 和 `simple-icons`，也可扩展 Lucide、Remix Icon、Heroicons、Material Symbols、Bootstrap Icons、Fluent UI System Icons 与 Carbon Icons。
 
-PengyuyanPPT_Skill 内置多层门禁，防止“文件生成了，但证据、密度、可编辑性或视觉还原不合格”。
+## 风格参考
 
-| 门禁 | 检查什么 | 失败后怎么处理 |
-|---|---|---|
-| Reference Gate | 每个阶段开始前是否读取对应 reference 文件 | 未读取不得进入阶段 |
-| Evidence Gate | 所有事实、数字、判断、建议是否可追溯到源材料 | 缺证据必须标记缺口或返工 |
-| Storyline Gate | 是否完成 2-3 条故事线脑暴、比较和 SCR 收敛 | 不能只交单版大纲 |
-| Density Gate | 每页是否有信息密度、组件清单、图表计划和 SO WHAT | 低密度页面必须补充或重排 |
-| Style Gate | 是否展示 8 张独立 16:9 风格样张，并锁定选定风格 | 不能只给文字风格说明 |
-| Blueprint Gate | 是否为全部页面生成逐页 ImageGen 蓝图 | 蓝图未确认不得进入 PPTX |
-| Asset Admission Gate | 每页图片资产是否有来源、必要性和可编辑性影响说明 | 无必要性的图片必须改为原生重建 |
-| Editable Layer Gate | 主标题、正文、关键数字、图表标签、页脚、SO WHAT 是否可编辑 | 主要信息图片化即失败 |
-| Visual Semantics Gate | 图表语义、曲线、面板系统、底色、层级和视觉重心是否忠实蓝图 | 不能用“可编辑”解释视觉降级 |
-| Curve Trace Gate | 流线、弧线、异形边界、Ribbon、桑基图等是否精确追踪 | 粗略矩形、少点折线或默认曲线失败 |
-| Spatial Registration Gate | 图标、节点、标签、箭头、曲线是否按锚点对齐 | 没重叠不代表位置合格 |
-| Container Overflow Gate | 文字是否越过卡片、单元格、结论条、SO WHAT 或图表区 | 容器内溢出即失败 |
-| Typography Gate | 字号是否符合固定 C0/T1-T14 层级 | 不得用无限缩字解决密度 |
-| Render QA Gate | 是否逐页渲染并与蓝图对照 | 文件生成成功不等于完成 |
-| Strict QA Gate | `validate_pptx.py --strict` 是否通过 manifest 和 visual QA 检查 | 出现 errors 必须返工 |
+以下 8 种样张用于帮助用户快速选方向；用户也可以直接指定完全不同的风格。
 
-关键原则：`结构可编辑` 和 `视觉还原` 是同等硬门槛；`strict QA` 通过不等于视觉合格；ImageGen 蓝图是参考，不是最终 PPT 背景。
+| 01 深红咨询 | 02 冷灰勃艮第 | 03 暖象牙酒红 | 04 象牙深蓝 |
+|---|---|---|---|
+| ![](assets/palette-samples/palette-01.png) | ![](assets/palette-samples/palette-02.png) | ![](assets/palette-samples/palette-03.png) | ![](assets/palette-samples/palette-04.png) |
+
+| 05 浅灰墨绿 | 06 米色铜棕 | 07 浅灰黑金 | 08 冷白深紫 |
+|---|---|---|---|
+| ![](assets/palette-samples/palette-05.png) | ![](assets/palette-samples/palette-06.png) | ![](assets/palette-samples/palette-07.png) | ![](assets/palette-samples/palette-08.png) |
 
 ## 安装
 
-使用 Git 将 PengyuyanPPT_Skill 安装到 Codex skills 目录，并保持目录名为 `pengyuyan-ppt-skill`。文件夹根目录必须包含 `SKILL.md`。
+### macOS / Linux
+
+```bash
+git clone https://github.com/GZPengyuyan/PengyuyanPPT.git \
+  "$HOME/.codex/skills/pengyuyan-ppt-skill"
+```
+
+### Windows PowerShell
 
 ```powershell
-git clone https://github.com/crazyykhllc-bit/CyberPPT.git "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
+git clone https://github.com/GZPengyuyan/PengyuyanPPT.git `
+  "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
+```
+
+安装后确认目录根部存在 `SKILL.md`，重新启动或刷新 Codex 会话。
+
+## 怎么用
+
+### 从材料完整制作 PPT
+
+```text
+使用 $pengyuyan-ppt-skill，根据我上传的业务材料制作一份高密度、可编辑的 PPT。
+先执行阶段 1，给我确认故事线、页数和逐页大纲。
+```
+
+### 直接把蓝图转成可编辑 PPT
+
+```text
+使用 $pengyuyan-ppt-skill 执行第三阶段。
+这张设计蓝图已经确认，请还原成可编辑 PPTX，先交付 A 版并验证 PowerPoint 能正常打开。
+```
+
+### 多页任务
+
+```text
+先完成并交付全部页面蓝图给我确认；全部蓝图确认后，再选择一张代表页制作可编辑 A 版样板。
+我的第一次 A/B 选择用于后续全部页面。
 ```
 
 ## 更新
+
+```bash
+cd "$HOME/.codex/skills/pengyuyan-ppt-skill"
+git pull
+```
+
+Windows PowerShell：
 
 ```powershell
 cd "$env:USERPROFILE\.codex\skills\pengyuyan-ppt-skill"
 git pull
 ```
 
-## PPTX 校验
+## 目录结构
 
-```bash
-python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manifest.json --visual-qa path/to/visual_qa_gate.json --strict --json-out path/to/report.json
+```text
+pengyuyan-ppt-skill/
+├── SKILL.md                 # 入口、阶段与确认门
+├── agents/openai.yaml       # Codex UI 元数据
+├── references/              # 内容、视觉、生产、图标与 QA 规则
+├── scripts/                 # 内容锁定、图标检索、测量和 PPTX 校验
+└── assets/                  # 风格样张、图标库与 README 截图
 ```
 
-## 许可
+## 校验工具
 
-MIT。详见 [LICENSE](LICENSE)。
+A 版默认运行非严格结构检查：
+
+```bash
+python3 scripts/validate_pptx.py deck.pptx --json-out qa.json
+```
+
+像素级或严格交付可提供 manifest 与视觉 QA：
+
+```bash
+python3 scripts/validate_pptx.py deck.pptx \
+  --manifest slide_manifest.json \
+  --visual-qa visual_qa_gate.json \
+  --strict --json-out qa.json
+```
+
+## 设计原则
+
+- 真实材料决定事实，蓝图决定视觉；
+- 先确认内容，再确认蓝图，最后生产 PPTX；
+- A 版优先解决“可用、可编辑、可打开”；
+- B 版才追求最后一段视觉一致性；
+- 不把整页蓝图截图当成最终 PPT 背景；
+- 不为了速度删除已确认的信息区、案例、表格、关键数字或结论。
+
+## License
+
+MIT，详见 [LICENSE](LICENSE)。
 
 ## Acknowledgments
 
-[SVG Repo](https://www.svgrepo.com/) · [Tabler Icons](https://github.com/tabler/tabler-icons) · [Simple Icons](https://github.com/simple-icons/simple-icons) · [Phosphor Icons](https://github.com/phosphor-icons/core) · [Robin Williams](https://en.wikipedia.org/wiki/Robin_Williams_(designer)) (CRAP principles)
+[Tabler Icons](https://github.com/tabler/tabler-icons) · [Simple Icons](https://github.com/simple-icons/simple-icons) · [Phosphor Icons](https://github.com/phosphor-icons/core) · [SVG Repo](https://www.svgrepo.com/)
