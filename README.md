@@ -16,7 +16,7 @@ PengyuyanPPT 是面向 Codex 的专业 PPT Skill，适合把文案、DOCX、PDF�
 2. 再确认长什么样；
 3. 最后转换为可编辑 PowerPoint。
 
-![蓝图与可编辑 PPTX 对照](assets/readme/stage3-editable-compare.png)
+![匿名蓝图与可编辑 PPTX 对照](assets/readme/stage3-editable-compare-anonymized-v2.png)
 
 > 隐私说明：README 中的画面、企业、场景和数据均为匿名虚构示意，不代表任何真实客户或项目。
 
@@ -66,7 +66,7 @@ PengyuyanPPT 是面向 Codex 的专业 PPT Skill，适合把文案、DOCX、PDF�
 
 **阶段输出：** 每页独立高清蓝图、整套缩略图总览和页码清单。
 
-![阶段 2：高清蓝图](assets/readme/stage2-blueprint.png)
+![阶段 2：匿名高清蓝图](assets/readme/stage2-blueprint-anonymized-v2.png)
 
 > 代表蓝图确认，只代表视觉方向锁定；只有整套蓝图确认后，才能进入阶段 3。
 
