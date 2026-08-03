@@ -18,6 +18,8 @@ PengyuyanPPT 是面向 Codex 的专业 PPT Skill，适合把文案、DOCX、PDF�
 
 ![蓝图与可编辑 PPTX 对照](assets/readme/stage3-editable-compare.png)
 
+> 隐私说明：README 中的画面、企业、场景和数据均为匿名虚构示意，不代表任何真实客户或项目。
+
 ## 适合什么任务
 
 - 行业研究、企业战略、品牌与市场分析；
@@ -60,6 +62,7 @@ PengyuyanPPT 是面向 Codex 的专业 PPT Skill，适合把文案、DOCX、PDF�
 - 可以指定企业模板、品牌色、参考图或任意 Image2/ImageGen 风格；
 - 代表页确认后固化色板、字体、网格、组件、图标与信息密度；
 - 必须先输出并确认全部页面蓝图，不能边做蓝图边制作 PPTX。
+- 对外展示或进入公开仓库的蓝图，必须移除真实公司名、Logo、客户名、人员信息和业务数据，统一使用匿名示例。
 
 **阶段输出：** 每页独立高清蓝图、整套缩略图总览和页码清单。
 
@@ -140,15 +143,11 @@ A 版不是低保真草稿。它必须保证：
 
 ## 风格参考
 
-以下 8 种样张用于帮助用户快速选方向；用户也可以直接指定完全不同的风格。
+以下两张图仅作为科技方案汇报的视觉方向示意。实际蓝图不受固定风格限制，可根据品牌色、模板或参考图重新设计。图中文字与数据均为匿名虚构内容。
 
-| 01 深红咨询 | 02 冷灰勃艮第 | 03 暖象牙酒红 | 04 象牙深蓝 |
-|---|---|---|---|
-| ![](assets/palette-samples/palette-01.png) | ![](assets/palette-samples/palette-02.png) | ![](assets/palette-samples/palette-03.png) | ![](assets/palette-samples/palette-04.png) |
-
-| 05 浅灰墨绿 | 06 米色铜棕 | 07 浅灰黑金 | 08 冷白深紫 |
-|---|---|---|---|
-| ![](assets/palette-samples/palette-05.png) | ![](assets/palette-samples/palette-06.png) | ![](assets/palette-samples/palette-07.png) | ![](assets/palette-samples/palette-08.png) |
+| 科技方案浅色风格 | 数字智能深色风格 |
+|---|---|
+| ![科技方案浅色风格](assets/readme/tech-style-light.png) | ![数字智能深色风格](assets/readme/tech-style-dark.png) |
 
 ## 安装
 
