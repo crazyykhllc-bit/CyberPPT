@@ -24,7 +24,7 @@ Creating a PPT properly involves three stages:
 
 **2. Choose a style and create the blueprints.**
 
-- CyberPPT will present 8 built-in styles. Once you choose one, it enters the blueprint stage and generates blueprints for all slides in one pass. The blueprints are not editable at this point.
+- CyberPPT will present 9 built-in styles. Once you choose one, it enters the blueprint stage and generates blueprints for all slides in one pass. The blueprints are not editable at this point.
 
 **3. Generate the editable PPT.**
 
@@ -38,7 +38,7 @@ Creating a PPT properly involves three stages:
 
 - Extract evidence, facts, numbers, claims, recommendations, and caveats from DOCX, PDF, TXT, XLSX, research reports, business materials, and raw data.
 - Build an MBB-style evidence table before storyline brainstorming, SCR convergence, and page planning.
-- Provide 8 fixed CyberPPT visual styles, each with a standalone 16:9 sample image.
+- Provide 9 fixed CyberPPT visual styles, each with a standalone 16:9 sample image.
 - Generate page-by-page ImageGen blueprints to lock composition, hierarchy, density, palette, and chart language.
 - Produce PPTX files with a hybrid strategy: complex visual fidelity plus editable core information.
 - Run structural QA, visual QA, editability QA, overflow QA, spatial registration QA, and curve tracing QA.
@@ -46,11 +46,11 @@ Creating a PPT properly involves three stages:
 ## Required Workflow
 
 1. Analysis: build an MBB evidence table, record conflicts and caveats, brainstorm 2-3 storylines, converge into SCR, and produce the page outline, chart plan, density target, and component inventory.
-2. Blueprint: show the 8 fixed visual styles; after selection, lock the style number, palette, grid, typography hierarchy, chart language, and page density, then generate ImageGen blueprints for all pages.
+2. Blueprint: show the 9 fixed visual styles; after selection, lock the style number, palette, grid, typography hierarchy, chart language, and page density, then generate ImageGen blueprints for all pages.
 3. Reconstruction: rebuild PPTX from the blueprint by separating complex visual assets from the editable information layer, using native text, shapes, tables, charts, SVG paths, or custom geometry.
 4. Delivery: provide the PPTX, rendered previews, `slide_manifest.json`, `visual_qa_gate.json`, and strict QA results. Any failed hard gate blocks delivery.
 
-## 8 Visual Styles
+## 9 Visual Styles
 
 | Option | Name | Sample |
 |---|---|---|
@@ -62,6 +62,7 @@ Creating a PPT properly involves three stages:
 | 06 | Paper Beige + Copper Brown | ![Palette 06](assets/palette-samples/palette-06.png) |
 | 07 | Clean Light Gray + Black Gold | ![Palette 07](assets/palette-samples/palette-07.png) |
 | 08 | Cool White Gray + Deep Purple | ![Palette 08](assets/palette-samples/palette-08.png) |
+| 09 | Pure White + Enterprise Blue (Signal Yellow Chapter) | ![Palette 09](assets/palette-samples/palette-09.png) |
 
 ## Gate System
 
@@ -73,7 +74,7 @@ CyberPPT includes multiple hard gates to prevent decks that look finished but fa
 | Evidence Gate | Every fact, number, claim, and recommendation traces back to source material | Missing evidence must be marked or fixed |
 | Storyline Gate | 2-3 storylines are brainstormed, compared, and converged into SCR | A single outline is not enough |
 | Density Gate | Each page has a density target, component inventory, chart plan, and SO WHAT | Low-density pages must be redesigned |
-| Style Gate | 8 standalone 16:9 visual samples are shown and one style is locked | Text-only style descriptions are not enough |
+| Style Gate | 9 standalone 16:9 visual samples are shown and one style is locked | Text-only style descriptions are not enough |
 | Blueprint Gate | All pages have ImageGen blueprints | PPTX production cannot start |
 | Asset Admission Gate | Every image asset has source, necessity, and editability impact | Unjustified images must be rebuilt natively |
 | Editable Layer Gate | Core text, numbers, labels, footers, and SO WHAT are editable | Rasterized core information fails |

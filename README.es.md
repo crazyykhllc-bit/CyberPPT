@@ -24,7 +24,7 @@ La creación correcta de un PPT se divide en tres etapas:
 
 **2. Elegir un estilo y crear los blueprints.**
 
-- CyberPPT presenta 8 estilos integrados. Después de elegir uno, pasa al proceso de generación de blueprints y crea de una sola vez los blueprints de todas las diapositivas. En este punto, los blueprints todavía no son editables.
+- CyberPPT presenta 9 estilos integrados. Después de elegir uno, pasa al proceso de generación de blueprints y crea de una sola vez los blueprints de todas las diapositivas. En este punto, los blueprints todavía no son editables.
 
 **3. Generar el PPT editable.**
 
@@ -38,7 +38,7 @@ La creación correcta de un PPT se divide en tres etapas:
 
 - Extraer evidencia, hechos, números, juicios, recomendaciones y caveats desde DOCX, PDF, TXT, XLSX, informes, materiales de negocio y datos brutos.
 - Crear una tabla de evidencia con estándar MBB antes del brainstorming de storyline, la convergencia SCR y el plan de páginas.
-- Ofrecer 8 estilos visuales fijos de CyberPPT, cada uno con una muestra independiente 16:9.
+- Ofrecer 9 estilos visuales fijos de CyberPPT, cada uno con una muestra independiente 16:9.
 - Generar blueprints ImageGen página por página para fijar composición, jerarquía, densidad, paleta y lenguaje gráfico.
 - Producir PPTX con una estrategia híbrida: fidelidad visual compleja e información principal editable.
 - Ejecutar QA estructural, QA visual, QA de editabilidad, QA de overflow, QA de registro espacial y QA de trazado de curvas.
@@ -46,11 +46,11 @@ La creación correcta de un PPT se divide en tres etapas:
 ## Flujo obligatorio
 
 1. Análisis: crear una tabla de evidencia MBB, registrar conflictos, vacíos y caveats; comparar 2-3 storylines; converger a SCR, plan de páginas, plan de gráficos, objetivo de densidad e inventario de componentes.
-2. Blueprint: mostrar los 8 estilos fijos; tras la selección, fijar número de estilo, paleta, grid, jerarquía tipográfica, lenguaje gráfico y densidad, y generar blueprints para todas las páginas.
+2. Blueprint: mostrar los 9 estilos fijos; tras la selección, fijar número de estilo, paleta, grid, jerarquía tipográfica, lenguaje gráfico y densidad, y generar blueprints para todas las páginas.
 3. Reconstrucción: reconstruir el PPTX desde el blueprint separando activos visuales complejos de la capa de información editable, usando texto nativo, formas, tablas, gráficos, SVG path o custom geometry.
 4. Entrega: proporcionar PPTX, renders de todas las páginas, `slide_manifest.json`, `visual_qa_gate.json` y resultados strict QA. Cualquier gate crítico fallido bloquea la entrega.
 
-## 8 estilos visuales
+## 9 estilos visuales
 
 | Opción | Nombre | Muestra |
 |---|---|---|
@@ -62,6 +62,7 @@ La creación correcta de un PPT se divide en tres etapas:
 | 06 | Beige papel + marrón cobre | ![Palette 06](assets/palette-samples/palette-06.png) |
 | 07 | Gris claro limpio + negro dorado | ![Palette 07](assets/palette-samples/palette-07.png) |
 | 08 | Blanco gris frío + púrpura profundo | ![Palette 08](assets/palette-samples/palette-08.png) |
+| 09 | Blanco puro + azul empresarial (amarillo señal para capítulos) | ![Palette 09](assets/palette-samples/palette-09.png) |
 
 ## Sistema de gates
 
@@ -73,7 +74,7 @@ CyberPPT incluye varios gates estrictos para evitar decks que parecen terminados
 | Evidence Gate | Todo hecho, número, juicio y recomendación remite a la fuente | La brecha debe marcarse o corregirse |
 | Storyline Gate | Se compararon 2-3 storylines y convergieron en SCR | Un solo outline no basta |
 | Density Gate | Cada página tiene densidad, componentes, plan gráfico y SO WHAT | Las páginas poco densas deben rediseñarse |
-| Style Gate | Se mostraron 8 muestras 16:9 independientes y se fijó un estilo | Una descripción textual no basta |
+| Style Gate | Se mostraron 9 muestras 16:9 independientes y se fijó un estilo | Una descripción textual no basta |
 | Blueprint Gate | Todas las páginas tienen blueprint ImageGen | No puede iniciar la producción PPTX |
 | Editable Layer Gate | Texto principal, números, labels, pie y SO WHAT son editables | La información principal rasterizada falla |
 | Visual Semantics Gate | Semántica de gráficos, curvas, paneles, superficies y jerarquía coinciden con el blueprint | La editabilidad no justifica degradación visual |

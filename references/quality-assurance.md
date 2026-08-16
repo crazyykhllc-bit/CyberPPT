@@ -77,7 +77,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 对比度弱或强调色滥用；
 - 页面之间信息密度差异；
 - 偏离已批准视觉方向；
-- 统一页面表面系统被错误重建为大面积白色卡片堆叠；
+- 风格 01–08 的统一页面表面系统被错误重建为大面积白色卡片堆叠；或风格 09 的白卡片 + 左边轨被改成米卡/咨询纸面；
 - 页面底色、面板底色、图表区底色和结论条底色是否符合蓝图视觉系统；
 - 主图表语义是否被替换，例如流线/桑基/迁移图被改成矩形条、平行四边形或普通堆叠图；
 - 是否出现“结构可编辑但视觉语义降级”的情况，例如为了原生重建把蓝图的曲线、流带、弧线、异形边界、统一表面系统、视觉重心或空间关系简化；
@@ -107,7 +107,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 
 - 内容页使用整页蓝图截图或覆盖面积超过页面 40% 的蓝图图片，且不是用户明确要求的不可编辑参考页。
 - 页面主图表由图片承载，而该图表可用 PowerPoint 原生文本、形状、表格或图表重建。
-- 为了可编辑性把蓝图中的关键视觉语义简化、替换或降级，例如把流线/弧线/异形图/统一页面表面系统重建为普通矩形、默认流程图、白卡片堆叠或粗略折线，视为 High/Critical。
+- 为了可编辑性把蓝图中的关键视觉语义简化、替换或降级，例如把流线/弧线/异形图/统一页面表面系统重建为普通矩形、默认流程图、白卡片堆叠（风格 09 除外）或粗略折线，视为 High/Critical。
 - 为了视觉保真把主要文字、关键数字、图表标签、来源、页脚或 SO WHAT 烘焙进图片/SVG，视为 High/Critical。
 - 可编辑信息层和视觉语义高保真没有同时通过，或把其中一个作为另一个的替代理由，视为 High/Critical。
 - 第二阶段组件清单写明“无需保留图片资产”，但最终 `pictures > 0`。
@@ -118,7 +118,7 @@ python scripts/validate_pptx.py path/to/deck.pptx --manifest path/to/slide_manif
 - 内容页正文因压缩密度低于正常可读层级；通常 T7 正文小于 9.5pt、T10 SO WHAT 正文小于 9.5pt、T11 图表轴/图例/微图标签小于 7.5pt 时必须复查并优先重排。
 - 未提供 `slide_manifest.json`、manifest 缺页、manifest 字段缺失、manifest 与 PPTX 图片数量不一致，均视为 High/Critical，不得交付确认。
 - validator strict 模式产生 `MANIFEST_SLIDE_MISSING`、`PICTURES_NOT_ALLOWED`、`PICTURE_COUNT_MISMATCH`、`UNJUSTIFIED_LARGE_IMAGE`、`FULL_SLIDE_BACKGROUND_RISK`、`MANIFEST_TYPOGRAPHY_INCOMPLETE`、`MANIFEST_FONT_BELOW_SCALE`、`MANIFEST_DUAL_GATE_INCOMPLETE`、`FONT_SIZE_BELOW_FOOTER_MIN` 任一错误时，必须返工。
-- 蓝图采用统一页面表面系统，但最终页面被擅自重建为大面积纯白卡片堆叠，视为 High，不得交付确认。
+- 蓝图采用统一页面表面系统时：风格 01–08 被擅自重建为大面积纯白卡片堆叠，或风格 09 被改成米卡/咨询纸面，视为 High，不得交付确认。
 - 曲线、流带、桑基、迁移、弧线或异形图表被替换成矩形、平行四边形、默认流程图或普通堆叠条，视为 High/Critical，不得交付确认。
 - 触发曲线/异形视觉精确追踪门，但缺少 trace crop、trace debug、追踪方法、资产路径或 manifest 记录，视为 Critical，不得交付确认。
 - 触发曲线/异形视觉精确追踪门，但缺少 `geometry_analysis` 或 `rendered_crop_comparison`，视为 Critical，不得交付确认。

@@ -39,6 +39,8 @@ build/
 !assets/
 !assets/palette-samples/
 !assets/palette-samples/*.png
+!assets/brand-marks/
+!assets/brand-marks/*.png
 !assets/icons/
 !assets/icons/**/*.svg
 

@@ -24,7 +24,7 @@ La création complète d'un PPT se déroule en trois étapes :
 
 **2. Choisir un style et créer les blueprints.**
 
-- CyberPPT propose 8 styles intégrés. Après votre sélection, il passe à la génération des blueprints et crée en une seule fois ceux de toutes les diapositives. À ce stade, les blueprints ne sont pas encore modifiables.
+- CyberPPT propose 9 styles intégrés. Après votre sélection, il passe à la génération des blueprints et crée en une seule fois ceux de toutes les diapositives. À ce stade, les blueprints ne sont pas encore modifiables.
 
 **3. Générer le PPT modifiable.**
 
@@ -38,7 +38,7 @@ La création complète d'un PPT se déroule en trois étapes :
 
 - Extraire preuves, faits, chiffres, jugements, recommandations et caveats depuis DOCX, PDF, TXT, XLSX, rapports, documents métier et données brutes.
 - Construire une table de preuves de standard MBB avant le brainstorming de storyline, la convergence SCR et le plan page par page.
-- Proposer 8 styles visuels CyberPPT fixes, chacun avec un échantillon 16:9 indépendant.
+- Proposer 9 styles visuels CyberPPT fixes, chacun avec un échantillon 16:9 indépendant.
 - Générer des blueprints ImageGen page par page pour verrouiller composition, hiérarchie, densité, palette et langage graphique.
 - Produire des PPTX avec une stratégie hybride : fidélité visuelle complexe et information principale éditable.
 - Exécuter QA structurelle, QA visuelle, QA d'éditabilité, QA de débordement, QA d'ancrage spatial et QA de traçage des courbes.
@@ -46,11 +46,11 @@ La création complète d'un PPT se déroule en trois étapes :
 ## Flux obligatoire
 
 1. Analyse : créer une table de preuves MBB, noter conflits, lacunes et caveats ; comparer 2-3 storylines ; converger vers SCR, plan de pages, plan de graphiques, densité cible et inventaire des composants.
-2. Blueprint : montrer les 8 styles fixes ; après sélection, verrouiller le numéro de style, la palette, la grille, la hiérarchie typographique, le langage graphique et la densité, puis générer les blueprints de toutes les pages.
+2. Blueprint : montrer les 9 styles fixes ; après sélection, verrouiller le numéro de style, la palette, la grille, la hiérarchie typographique, le langage graphique et la densité, puis générer les blueprints de toutes les pages.
 3. Reconstruction : produire le PPTX à partir du blueprint en séparant les actifs visuels complexes de la couche d'information éditable, avec texte natif, formes, tableaux, graphiques, SVG path ou custom geometry.
 4. Livraison : fournir le PPTX, les rendus de toutes les pages, `slide_manifest.json`, `visual_qa_gate.json` et les résultats strict QA. Tout gate critique échoué bloque la livraison.
 
-## 8 styles visuels
+## 9 styles visuels
 
 | Option | Nom | Exemple |
 |---|---|---|
@@ -62,6 +62,7 @@ La création complète d'un PPT se déroule en trois étapes :
 | 06 | Beige papier + brun cuivre | ![Palette 06](assets/palette-samples/palette-06.png) |
 | 07 | Gris clair pur + noir or | ![Palette 07](assets/palette-samples/palette-07.png) |
 | 08 | Blanc gris froid + violet profond | ![Palette 08](assets/palette-samples/palette-08.png) |
+| 09 | Blanc pur + bleu entreprise (jaune signal pour les chapitres) | ![Palette 09](assets/palette-samples/palette-09.png) |
 
 ## Système de gates
 
@@ -73,7 +74,7 @@ CyberPPT inclut plusieurs gates stricts pour éviter qu'un deck paraisse termin�
 | Evidence Gate | Chaque fait, chiffre, jugement et recommandation remonte aux sources | La lacune doit être marquée ou corrigée |
 | Storyline Gate | 2-3 storylines sont comparées et convergent vers SCR | Un seul plan ne suffit pas |
 | Density Gate | Chaque page a densité, composants, plan graphique et SO WHAT | Les pages peu denses doivent être refaites |
-| Style Gate | 8 échantillons 16:9 indépendants sont montrés et un style est verrouillé | Une description texte ne suffit pas |
+| Style Gate | 9 échantillons 16:9 indépendants sont montrés et un style est verrouillé | Une description texte ne suffit pas |
 | Blueprint Gate | Toutes les pages ont un blueprint ImageGen | La production PPTX ne peut pas démarrer |
 | Editable Layer Gate | Texte clé, chiffres, labels, footer et SO WHAT sont éditables | L'information principale rasterisée échoue |
 | Visual Semantics Gate | Sémantique des graphiques, courbes, panneaux, surfaces et hiérarchie correspondent au blueprint | L'éditabilité n'excuse pas la dégradation visuelle |
